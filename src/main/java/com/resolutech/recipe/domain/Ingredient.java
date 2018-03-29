@@ -8,19 +8,25 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String description;
+    private String description;
 
-    BigDecimal amount;
+    private BigDecimal amount;
 
     @OneToOne(fetch = FetchType.EAGER)
-    UnitOfMeasure unitOfMeasure;
+    private UnitOfMeasure unitOfMeasure;
 
     @ManyToOne
-    Recipe recipe;
+    private Recipe recipe;
 
     public Ingredient() {
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeasure = unitOfMeasure;
     }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
