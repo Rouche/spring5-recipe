@@ -12,5 +12,14 @@
 
 <body>
     <h1>My Index Template recipe</h1>
+
+	<div th:text="${category.description}"></div>
+	<div th:text="${uom.description}"></div>
+
+	<div th:each="recipe : ${recipes}">
+		<span th:text="${recipe.id}"></span>
+		<span th:text="${recipe.description}"></span>
+	</div>
+
 </body>
 </html>
