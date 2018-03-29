@@ -11,6 +11,7 @@ public class Ingredient {
     Long id;
 
     String description;
+
     BigDecimal amount;
 
     @OneToOne(fetch = FetchType.EAGER)
