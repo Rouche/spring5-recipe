@@ -7,7 +7,7 @@ import java.util.Set;
 
 /**
  * @Important
- * Always exclude Lazu collection with Lombok automatic
+ * Always exclude Lazy collection with Lombok automatic generation
  */
 @Data
 @EqualsAndHashCode(exclude={"recipes"})

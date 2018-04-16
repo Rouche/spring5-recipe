@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by jt on 6/13/17.
+ * @Important When using Builder we have to tell Lombok to generate both No Args and All Args
  */
 @Data
 @EqualsAndHashCode(of={"id"})

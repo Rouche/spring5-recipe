@@ -29,6 +29,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @Important tests with Mockito
+ */
 public class IndexControllerTest {
 
     IndexController indexController;
