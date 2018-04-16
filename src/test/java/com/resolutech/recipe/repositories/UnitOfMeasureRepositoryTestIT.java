@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 /**
- * @Important Integration test with full spring context
+ * @Important section 127 Integration test with full spring context, convention is to use IT at the end of class name.
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest

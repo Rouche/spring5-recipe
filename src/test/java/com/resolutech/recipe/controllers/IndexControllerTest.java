@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * @Important tests with Mockito
+ * @Important section 122-125 tests with Mockito
  */
 public class IndexControllerTest {
 
