@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * @Important
+ * @Important section 111-117
  * Always exclude Lazy collection with Lombok automatic generation
  */
 @Data
