@@ -30,7 +30,7 @@
                         <h1 class="card-title">My Index Template recipe</h1>
                     </div>
 
-                    <td class="card-body">
+                    <div class="card-body">
                         <table class="table table-responsive table-hover w-100 d-block d-md-table"
                                th:if="${not #lists.isEmpty(recipes)}">
                             <thead class="thead-light">
@@ -50,10 +50,10 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 </html>

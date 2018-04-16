@@ -6,7 +6,6 @@ import com.resolutech.recipe.repositories.CategoryRepository;
 import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import com.resolutech.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
