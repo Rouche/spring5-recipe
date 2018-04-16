@@ -5,8 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * @Important
+ * Always exclude Lazu collection with Lombok automatic
+ */
 @Data
 @EqualsAndHashCode(exclude={"recipes"})
+@ToString(exclude={"recipes"})
 @Entity
 public class Category {
 

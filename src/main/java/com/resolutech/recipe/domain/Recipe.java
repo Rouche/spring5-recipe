@@ -1,7 +1,6 @@
 package com.resolutech.recipe.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -15,6 +14,9 @@ import java.util.Set;
 @EqualsAndHashCode(of={"id"})
 @Slf4j
 @Entity
+@Builder
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Recipe {
 
     @Id
