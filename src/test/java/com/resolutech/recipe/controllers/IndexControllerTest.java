@@ -4,30 +4,29 @@ import com.resolutech.recipe.domain.Category;
 import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.domain.UnitOfMeasure;
 import com.resolutech.recipe.repositories.CategoryRepository;
-import com.resolutech.recipe.repositories.RecipeRepository;
 import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import com.resolutech.recipe.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @Important tests with Mockito
@@ -56,6 +55,15 @@ public class IndexControllerTest {
         when(categoryRepository.findByDescription(any(String.class))).thenReturn(Optional.of(new Category()));
         when(unitOfMeasureRepository.findByDescription(any(String.class))).thenReturn(Optional.of(new UnitOfMeasure()));
 
+    }
+
+    @Test
+    public void testMockMVC() throws Exception {
+        MockMvc mockMVC = MockMvcBuilders.standaloneSetup(indexController).build();
+
+        mockMVC.perform(get("/"))
+            .andExpect(status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("index"));
     }
 
     @Test
