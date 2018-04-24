@@ -52,8 +52,10 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         log.debug("custom setNotes() called");
-        this.notes = notes;
-        notes.setRecipe(this);
+        if(notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
