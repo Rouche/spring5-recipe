@@ -4,30 +4,28 @@
     <meta charset="UTF-8"/>
     <title>Show Recipe</title>
 
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"
+          crossorigin="anonymous"
           th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"
+            crossorigin="anonymous" integrity="sha256-6CdFDnYGDh6FNviEF99A9WFKx6g6dCRjWdDQX/roE4k="
             th:src="@{/webjars/popper.js/popper.min.js}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
+            crossorigin="anonymous" integrity=""
             th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
-            <div class="col-md-6 col-lg-offset-3">
+            <div class="col-lg-9 mx-auto">
                 <div>
-                    <div class="card">
+                    <div class="card border-primary">
                         <div class="card-header bg-primary text-white">
                             <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
                         </div>
@@ -41,7 +39,7 @@
                                         <!--/*@thymesVar id="categorie" type="com.resolutech.recipe.domain.Category"*/-->
                                         <li th:remove="all">cat One</li>
                                         <li th:remove="all">cat Two</li>
-                                        <li th:each="category : ${recipe.categories}" th:text="${category.description}">cat Three</li>
+                                       <li th:each="category : ${recipe.categories}" th:text="${category.description}">cat Three</li>
                                     </ul>
                                 </div>
                             </div>
@@ -89,9 +87,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card border-primary">
                         <div class="card-header bg-primary text-white">
-                            <h1 class="card-title" >Ingredients</h1>
+                            <div class="row">
+                                <div class="col-lg-8 ">
+                                    <h1 class="card-title">Ingredients</h1>
+                                </div>
+                                <div class="col-lg-1">
+                                    <a class="btn btn-secondary" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -100,7 +105,7 @@
                                         <!--/*@thymesVar id="ingredient" type="com.resolutech.recipe.domain.Ingredient"*/-->
                                         <li th:each="ingredient : ${recipe.ingredients}">
                                             <span th:text="${ingredient.amount}"></span><span> - </span>
-                                            <span th:text="${ingredient.unitOfMeasure.description}"></span>
+                                            <span th:text="${ingredient.uom.description}"></span>
                                             <span th:text="${ingredient.description}"></span>
                                         </li>
                                     </ul>
@@ -108,7 +113,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card border-primary">
                         <div class="card-header bg-primary text-white">
                             <h1 class="card-title" >Directions</h1>
                         </div>
@@ -120,7 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card border-primary">
                         <div class="card-header bg-primary text-white">
                             <h1 class="card-title" >Notes</h1>
                         </div>

@@ -1,8 +1,6 @@
 package com.resolutech.recipe.converters;
 
 import com.resolutech.recipe.commands.IngredientCommand;
-import com.resolutech.recipe.converters.IngredientToIngredientCommand;
-import com.resolutech.recipe.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.resolutech.recipe.domain.Ingredient;
 import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.domain.UnitOfMeasure;
@@ -50,11 +48,11 @@ public class IngredientToIngredientCommandTest {
         ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
         ingredient.setDescription(DESCRIPTION);
-        ingredient.setUnitOfMeasure(null);
+        ingredient.setUom(null);
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
-        assertNull(ingredientCommand.getUnitOfMeasure());
+        assertNull(ingredientCommand.getUom());
         assertEquals(ID_VALUE, ingredientCommand.getId());
        // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
@@ -73,13 +71,13 @@ public class IngredientToIngredientCommandTest {
         UnitOfMeasure uom = new UnitOfMeasure();
         uom.setId(UOM_ID);
 
-        ingredient.setUnitOfMeasure(uom);
+        ingredient.setUom(uom);
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
         assertEquals(ID_VALUE, ingredientCommand.getId());
-        assertNotNull(ingredientCommand.getUnitOfMeasure());
-        assertEquals(UOM_ID, ingredientCommand.getUnitOfMeasure().getId());
+        assertNotNull(ingredientCommand.getUom());
+        assertEquals(UOM_ID, ingredientCommand.getUom().getId());
         // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());

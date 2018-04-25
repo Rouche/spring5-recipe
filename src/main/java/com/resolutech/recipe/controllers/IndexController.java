@@ -17,12 +17,12 @@ import java.util.Optional;
 public class IndexController {
 
     private CategoryRepository categoryRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private UnitOfMeasureRepository uomRepository;
     private RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeService recipeService) {
+    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository uomRepository, RecipeService recipeService) {
         this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.uomRepository = uomRepository;
         this.recipeService = recipeService;
     }
 
@@ -31,15 +31,15 @@ public class IndexController {
         log.debug("Index requested");
 
         Optional<Category> category = categoryRepository.findByDescription("Italian");
-        Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
+        Optional<UnitOfMeasure> uom = uomRepository.findByDescription("Teaspoon");
 
         model.addAttribute("category", category.get());
-        model.addAttribute("uom", unitOfMeasure.get());
+        model.addAttribute("uom", uom.get());
 
         model.addAttribute("recipes", recipeService.getRecipes());
 
         log.debug("Cat ID: " + category.get().getId());
-        log.debug("Uom ID: " + unitOfMeasure.get().getId());
+        log.debug("Uom ID: " + uom.get().getId());
 
         return "index";
     }

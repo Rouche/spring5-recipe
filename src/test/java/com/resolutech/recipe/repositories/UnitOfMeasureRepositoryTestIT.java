@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class UnitOfMeasureRepositoryTestIT {
 
     @Autowired
-    UnitOfMeasureRepository unitOfMeasureRepository;
+    UnitOfMeasureRepository uomRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class UnitOfMeasureRepositoryTestIT {
     @Test
     @DirtiesContext
     public void findByDescription() {
-        Optional<UnitOfMeasure> uomOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
+        Optional<UnitOfMeasure> uomOfMeasure = uomRepository.findByDescription("Teaspoon");
 
         assertEquals("Teaspoon", uomOfMeasure.get().getDescription());
 
@@ -39,7 +39,7 @@ public class UnitOfMeasureRepositoryTestIT {
 
     @Test
     public void findByDescriptionCup() {
-        Optional<UnitOfMeasure> uomOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
+        Optional<UnitOfMeasure> uomOfMeasure = uomRepository.findByDescription("Cup");
 
         assertEquals("Cup", uomOfMeasure.get().getDescription());
 

@@ -43,16 +43,16 @@ public class IndexControllerTest {
     @Mock
     CategoryRepository categoryRepository;
     @Mock
-    UnitOfMeasureRepository unitOfMeasureRepository;
+    UnitOfMeasureRepository uomRepository;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        indexController = new IndexController(categoryRepository, unitOfMeasureRepository, recipeService);
+        indexController = new IndexController(categoryRepository, uomRepository, recipeService);
 
         when(categoryRepository.findByDescription(any(String.class))).thenReturn(Optional.of(new Category()));
-        when(unitOfMeasureRepository.findByDescription(any(String.class))).thenReturn(Optional.of(new UnitOfMeasure()));
+        when(uomRepository.findByDescription(any(String.class))).thenReturn(Optional.of(new UnitOfMeasure()));
 
     }
 

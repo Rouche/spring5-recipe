@@ -16,12 +16,12 @@ public class UnitOfMeasureToUnitOfMeasureCommand implements Converter<UnitOfMeas
     @Synchronized
     @Nullable
     @Override
-    public UnitOfMeasureCommand convert(UnitOfMeasure unitOfMeasure) {
+    public UnitOfMeasureCommand convert(UnitOfMeasure uom) {
 
-        if (unitOfMeasure != null) {
+        if (uom != null) {
             final UnitOfMeasureCommand uomc = new UnitOfMeasureCommand();
-            uomc.setId(unitOfMeasure.getId());
-            uomc.setDescription(unitOfMeasure.getDescription());
+            uomc.setId(uom.getId());
+            uomc.setDescription(uom.getDescription());
             return uomc;
         }
         return null;
