@@ -7,6 +7,7 @@ import com.resolutech.recipe.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.resolutech.recipe.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.resolutech.recipe.domain.Ingredient;
 import com.resolutech.recipe.domain.Recipe;
+import com.resolutech.recipe.repositories.IngredientRepository;
 import com.resolutech.recipe.repositories.RecipeRepository;
 import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import org.junit.Before;
@@ -34,6 +35,9 @@ public class IngredientServiceImplTest {
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
 
+    @Mock
+    IngredientRepository ingredientRepository;
+
     IngredientService ingredientService;
 
     //init converters
@@ -47,7 +51,7 @@ public class IngredientServiceImplTest {
         MockitoAnnotations.initMocks(this);
 
         ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient, recipeRepository,
-                unitOfMeasureRepository);
+                ingredientRepository, unitOfMeasureRepository);
     }
 
     @Test
@@ -108,5 +112,17 @@ public class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, times(1)).save(any(Recipe.class));
 
+    }
+
+    @Test
+    public void deleteById() {
+        //Given
+        Long id = 2L;
+
+        //When
+        ingredientService.deleteById(id);
+
+        //Then
+        verify(ingredientRepository, times(1)).deleteById(id);
     }
 }

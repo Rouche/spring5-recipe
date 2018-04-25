@@ -42,6 +42,7 @@ public class IngredientControllerTest {
         MockitoAnnotations.initMocks(this);
 
         controller = new IngredientController(recipeService, ingredientService, unitOfMeasureService);
+        //@Important check documentation on that
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
@@ -107,10 +108,10 @@ public class IngredientControllerTest {
 
         //when
         mockMvc.perform(get("/recipe/1/ingredient/2/update"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("recipe/ingredient/ingredientform"))
-                .andExpect(model().attributeExists("ingredient"))
-                .andExpect(model().attributeExists("uomList"));
+            .andExpect(status().isOk())
+            .andExpect(view().name("recipe/ingredient/ingredientform"))
+            .andExpect(model().attributeExists("ingredient"))
+            .andExpect(model().attributeExists("uomList"));
     }
 
     @Test
@@ -133,5 +134,16 @@ public class IngredientControllerTest {
             .andExpect(status().is3xxRedirection())
             .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
 
+    }
+
+    @Test
+    public void deleteById() throws Exception {
+        //Given
+        Long id = 2L;
+
+
+        mockMvc.perform(get("/recipe/1/ingredient/2/delete"))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/recipe/1/show"));
     }
 }
