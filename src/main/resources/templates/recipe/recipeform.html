@@ -21,7 +21,6 @@
             th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
             <div class="col-lg-9 mx-auto">
@@ -69,10 +68,10 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Difficulty:</label>
-                                        <select class="form-control">
-                                            <option>Easy</option>
-                                            <option>Medium</option>
-                                            <option>Hard</option>
+                                        <select class="form-control" th:field="*{difficulty}">
+                                            <option th:each="difficulty : ${T(com.resolutech.recipe.domain.Difficulty).values()}"
+                                                th:text="${difficulty.name()}"
+                                                th:value="${difficulty.name()}">Easy</option>
                                         </select>
                                     </div>
                                 </div>
