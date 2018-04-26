@@ -51,7 +51,7 @@ public class Recipe {
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {
-        log.debug("custom setNotes() called");
+        log.trace("custom setNotes() called");
         if(notes != null) {
             this.notes = notes;
             notes.setRecipe(this);
@@ -59,7 +59,7 @@ public class Recipe {
     }
 
     public Recipe addIngredient(Ingredient ingredient) {
-        log.debug("custom addIngredient() called");
+        log.trace("custom addIngredient() called");
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;

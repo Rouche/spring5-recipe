@@ -2,6 +2,7 @@ package com.resolutech.recipe.controllers;
 
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.domain.Recipe;
+import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +52,18 @@ public class RecipeControllerTest {
             .andExpect(status().isOk())
             .andExpect(view().name("recipe/show"))
             .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception {
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        //Then
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("errors/404error"));
+
     }
 
     @Test
