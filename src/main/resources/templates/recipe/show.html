@@ -1,25 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Show Recipe</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          crossorigin="anonymous"
-          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<head th:replace="~{fragments/head :: head('Recipe')}"></head>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            crossorigin="anonymous" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            crossorigin="anonymous" integrity="sha256-6CdFDnYGDh6FNviEF99A9WFKx6g6dCRjWdDQX/roE4k="
-            th:src="@{/webjars/popper.js/popper.min.js}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            crossorigin="anonymous" integrity=""
-            th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</head>
 <body>
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
@@ -27,20 +10,37 @@
                 <div>
                     <div class="card border-primary">
                         <div class="card-header bg-primary text-white">
-                            <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
+                                </div>
+                                <div class="col-lg-3">
+                                    <form method="post" class="d-inline-flex p-2" enctype="multipart/form-data"
+                                          th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}">
+                                        <label th:for="imagefile" class="btn btn-secondary mb-0 mr-1">Change Image</label>
+                                        <input th:id="imagefile" name="imagefile" type="file" class="d-none">
+                                        <button type="submit" class="btn btn-secondary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
+                            <div class="row justify-content-between">
+                                <div class="col-md-2">
                                     <h5>Categories:</h5>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-2">
                                     <ul>
                                         <!--/*@thymesVar id="categorie" type="com.resolutech.recipe.domain.Category"*/-->
                                         <li th:remove="all">cat One</li>
                                         <li th:remove="all">cat Two</li>
-                                       <li th:each="category : ${recipe.categories}" th:text="${category.description}">cat Three</li>
+                                        <li th:each="category : ${recipe.categories}" th:text="${category.description}">cat Three</li>
                                     </ul>
+                                </div>
+                                <div class="col-md-5">
+                                    <img src="../../static/images/guacamole400x400WithX.jpg"
+                                         th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}"
+                                         width="200" height="auto">
                                 </div>
                             </div>
                             <div class="row">
@@ -90,7 +90,7 @@
                     <div class="card border-primary">
                         <div class="card-header bg-primary text-white">
                             <div class="row">
-                                <div class="col-lg-8 ">
+                                <div class="col-lg-8">
                                     <h1 class="card-title">Ingredients</h1>
                                 </div>
                                 <div class="col-lg-1">
