@@ -5,7 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * Created by jt on 6/21/17.
+ * @Author Jean-Francois Larouche
  */
 @Getter
 @Setter

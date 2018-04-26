@@ -3,6 +3,7 @@ package com.resolutech.recipe.services;
 import com.resolutech.recipe.converters.RecipeCommandToRecipe;
 import com.resolutech.recipe.converters.RecipeToRecipeCommand;
 import com.resolutech.recipe.domain.Recipe;
+import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +53,16 @@ public class RecipeServiceImplTest {
 
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdFailTest() throws Exception {
+
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        recipeService.findById(1L);
     }
 
     @Test

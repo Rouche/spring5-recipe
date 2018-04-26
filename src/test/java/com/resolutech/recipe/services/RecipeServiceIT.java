@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- * Created by jt on 6/21/17.
+ * @Author Jean-Francois Larouche
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

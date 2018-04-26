@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.stream.Collector;
 
 /**
- * Created by jt on 7/3/17.
+ * @Author Jean-Francois Larouche
  */
 @Controller
 public class ImageController {

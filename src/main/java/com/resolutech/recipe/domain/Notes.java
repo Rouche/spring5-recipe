@@ -7,7 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 
 /**
- * Created by jt on 6/13/17.
+ * @Author Jean-Francois Larouche
  */
 @Data
 @EqualsAndHashCode(of={"id"})

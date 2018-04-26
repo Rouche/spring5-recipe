@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
 /**
- * Created by jt on 6/21/17.
+ * @Author Jean-Francois Larouche
  */
 public class IngredientToIngredientCommandTest {
 
