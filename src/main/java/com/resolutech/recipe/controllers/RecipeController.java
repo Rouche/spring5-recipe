@@ -7,12 +7,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
 public class RecipeController {
+
+    private static final String RECIPE_RECIPEFORM = "recipe/recipeform";
 
     private RecipeService recipeService;
 
@@ -45,13 +50,20 @@ public class RecipeController {
         RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(id));
         model.addAttribute("recipe", recipeCommand);
 
-        return "recipe/recipeform";
+        return RECIPE_RECIPEFORM;
     }
 
     @PostMapping("/recipe")
-    public String saveOrUpdate(@ModelAttribute RecipeCommand recipeCommand) {
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult) {
         log.debug("saveOrUpdate");
 
+        if(bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach( error -> {
+                log.debug(error.toString());
+            });
+
+            return RECIPE_RECIPEFORM;
+        }
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
