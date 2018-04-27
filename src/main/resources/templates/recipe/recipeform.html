@@ -8,6 +8,11 @@
         <div class="row">
             <div class="col-lg-9 mx-auto">
                 <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                        Please correct the errors
+                    </div>
+
                     <input type="hidden" th:field="*{id}"/>
                     <div>
                         <div class="card border-primary">
@@ -15,10 +20,16 @@
                                 <h1 class="card-title">Edit Recipe Information</h1>
                             </div>
                             <div class="card-body">
-                                <div class="row form-group">
-                                    <div class="col-lg-3">
+                                <div class="row">
+                                    <!--@Important error messages -->
+                                    <div class="col-lg-3 form-group">
                                         <label>Recipe Description:</label>
-                                        <input type="text" class="form-control" th:field="*{description}"/>
+                                        <input type="text" class="form-control" th:field="*{description}" th:errorClass="border-danger"/>
+                                        <span class="form-text" th:if="${#fields.hasErrors('description')}">
+                                            <ul>
+                                                <li class="text-danger" th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                                            </ul>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -41,16 +52,29 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
+                                    <!-- PREP TIME -->
                                     <div class="col-lg-3">
                                         <label>Prep Time:</label>
-                                        <input type="text" class="form-control" th:field="*{prepTime}"/>
+                                        <input type="text" class="form-control" th:field="*{prepTime}" th:errorClass="border-danger"/>
+                                        <span class="form-text" th:if="${#fields.hasErrors('prepTime')}">
+                                            <ul>
+                                                <li class="text-danger" th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"></li>
+                                            </ul>
+                                        </span>
                                     </div>
+                                    <!-- COOK TIME -->
                                     <div class="col-lg-3">
                                         <label>Cooktime:</label>
-                                        <input type="text" class="form-control" th:field="*{cookTime}"/>
+                                        <input type="text" class="form-control" th:field="*{cookTime}" th:errorClass="border-danger"/>
+                                        <span class="form-text" th:if="${#fields.hasErrors('cookTime')}">
+                                            <ul>
+                                                <li class="text-danger" th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"></li>
+                                            </ul>
+                                        </span>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Difficulty:</label>
+                                        <!--/*@thymesVar id="difficulty" type="com.resolutech.recipe.domain.Difficulty"*/-->
                                         <select class="form-control" th:field="*{difficulty}">
                                             <option th:each="difficulty : ${T(com.resolutech.recipe.domain.Difficulty).values()}"
                                                 th:text="${difficulty.name()}"
@@ -59,22 +83,35 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
+                                    <!-- SERVINGS -->
                                     <div class="col-lg-3">
                                          <label>Servings:</label>
-                                        <input type="text" class="form-control" th:field="*{servings}"/>
+                                        <input type="text" class="form-control" th:field="*{servings}" th:errorClass="border-danger"/>
+                                        <span class="form-text" th:if="${#fields.hasErrors('servings')}">
+                                            <ul>
+                                                <li class="text-danger" th:each="err : ${#fields.errors('servings')}" th:text="${err}"></li>
+                                            </ul>
+                                        </span>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Source:</label>
                                         <input type="text" class="form-control" th:field="*{source}"/>
                                     </div>
+                                    <!-- URL -->
                                     <div class="col-lg-3">
                                         <label>URL:</label>
-                                        <input type="text" class="form-control" th:field="*{url}"/>
+                                        <input type="text" class="form-control" th:field="*{url}" th:errorClass="border-danger"/>
+                                        <span class="form-text" th:if="${#fields.hasErrors('url')}">
+                                            <ul>
+                                                <li class="text-danger" th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+                                            </ul>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card border-primary">
+                            <!-- INGREDIENTS -->
                             <div class="card-header bg-primary text-white">
                                 <div class="row form-group">
                                     <div class="col-lg-12 ">
@@ -99,17 +136,25 @@
                             </div>
                         </div>
                         <div class="card border-primary">
+                            <!-- DIRECTIONS -->
                             <div class="card-header bg-primary text-white">
                                 <h1 class="card-title">Directions</h1>
                             </div>
                             <div class="card-body">
                                 <div class="row form-group">
                                     <div class="col-lg-12">
-                                        <textarea class="form-control" rows="3" th:field="*{directions}"></textarea></div>
+                                        <textarea class="form-control" rows="3" th:field="*{directions}" th:errorClass="border-danger"></textarea>
+                                    </div>
+                                    <span class="form-text" th:if="${#fields.hasErrors('directions')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('directions')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="card border-primary">
+                            <!-- NOTES -->
                             <div class="card-header bg-primary text-white">
                                 <h1 class="card-title">Notes</h1>
                             </div>
