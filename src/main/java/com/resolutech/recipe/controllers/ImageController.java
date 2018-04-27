@@ -43,9 +43,15 @@ public class ImageController {
     //@important return image data
     @GetMapping("/recipe/{id}/recipeimage")
     public void getRecipeImage(@PathVariable String id, HttpServletResponse response) throws IOException {
+
         RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(id));
 
         Byte[] content = recipeCommand.getImage();
+
+        if(content == null) {
+            return;
+        }
+
         final byte[] bytesPrim = new byte[content.length];
         for(int i = 0; i < content.length; ++i) {
             bytesPrim[i] = content[i].byteValue();

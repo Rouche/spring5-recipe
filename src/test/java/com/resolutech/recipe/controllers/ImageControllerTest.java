@@ -21,8 +21,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 public class ImageControllerTest {
 
@@ -42,7 +44,9 @@ public class ImageControllerTest {
 
         imageController = new ImageController(imageService, recipeService);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(imageController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(imageController)
+                .setControllerAdvice(new ControllerExceptionHandler())
+                .build();
     }
 
     //@Important test with multipart controller
@@ -87,5 +91,29 @@ public class ImageControllerTest {
         byte[] reponseBytes = response.getContentAsByteArray();
 
         assertEquals(s.getBytes().length, reponseBytes.length);
+    }
+
+    @Test
+    public void testGetNumberFormat() throws Exception {
+
+        //Then
+        mockMvc.perform(get("/recipe/wefwef/recipeimage"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("errors/4xxerror"));
+
+    }
+
+    @Test
+    public void testPostNumberFormat() throws Exception {
+
+        //Given
+        MockMultipartFile multipartFile =
+                new MockMultipartFile("imagefile", "testing.txt", "text/plain",
+                        "Spring Framework Guru".getBytes());
+
+        //Then
+        mockMvc.perform(multipart("/recipe/wefwef/image").file(multipartFile))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("errors/4xxerror"));
     }
 }

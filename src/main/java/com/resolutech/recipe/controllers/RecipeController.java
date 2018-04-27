@@ -1,11 +1,7 @@
 package com.resolutech.recipe.controllers;
 
 import com.resolutech.recipe.commands.RecipeCommand;
-import com.resolutech.recipe.domain.Category;
-import com.resolutech.recipe.domain.UnitOfMeasure;
 import com.resolutech.recipe.exceptions.NotFoundException;
-import com.resolutech.recipe.repositories.CategoryRepository;
-import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import com.resolutech.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -72,16 +66,10 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    //@Important single Exception handling
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {
-        log.error("Not found exception");
-        log.error(exception.getMessage());
-
-        ModelAndView view = new ModelAndView();
-        view.addObject("exception", exception);
-        view.setViewName("errors/404error");
-
-        return view;
+        return ErrorUtils.getErrorView(exception, "404 Not found");
     }
 }
