@@ -23,7 +23,7 @@
                                 <div class="row">
                                     <!--@Important error messages -->
                                     <div class="col-lg-3 form-group">
-                                        <label>Recipe Description:</label>
+                                        <label th:text="#{recipe.description}"></label>
                                         <input type="text" class="form-control" th:field="*{description}" th:errorClass="border-danger"/>
                                         <span class="form-text" th:if="${#fields.hasErrors('description')}">
                                             <ul>
