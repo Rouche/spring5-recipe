@@ -131,3 +131,6 @@ To print the URI of the service exposed locally
 ```
 minikube service mongo --url
 ```
+
+#### 9 OS Images repository
+
