@@ -163,5 +163,5 @@ Pod Overview: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 - Pod : Single applicartion instance. Smallest object you can create.
     * Pod have 1-1 relationship with container (app)
     * Pod can have multiple containers but different kind
-    * Different container in same Pod share localhost address.
+    * Containers in same Pod share localhost address.
     
