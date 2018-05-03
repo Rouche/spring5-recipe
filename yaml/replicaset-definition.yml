@@ -1,0 +1,24 @@
+apiVersion: apps/v1 #Replicaset version
+kind: ReplicaSet
+metadata: #Replicaset
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+spec: #Replicaset
+  template: #Required in case replicator needs to replace a failing Pod.
+    metadata: #Pod
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+
+    spec: #Pod
+      containers:
+        - name: nginx-container
+          image: nginx
+
+  replicas: 3
+  selector:
+    matchLabels: #Will match other Pod already created and not in this file
+      app: myapp

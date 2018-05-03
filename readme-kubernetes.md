@@ -1,5 +1,5 @@
 
-## Installation Windows 10
+## Personnal notes trying to install on Windows 10
 
 Tutorial: https://rominirani.com/tutorial-getting-started-with-kubernetes-on-your-windows-laptop-with-minikube-3269b54a226
 

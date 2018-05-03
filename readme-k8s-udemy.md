@@ -1,5 +1,5 @@
 
-## UDEMY course Kubernetes
+## UDEMY course Kubernetes, important notes
 
 https://www.udemy.com/learn-kubernetes/learn
 
@@ -117,14 +117,17 @@ The tabs below will contain a notice about what flags on ```kubeadm init``` are 
 
     ```kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.56.5```
     
-    Copy the join command.
+    Copy the join command from kubeadm init
 
     ```export KUBECONFIG=/etc/kubernetes/admin.conf```
 
-- Install Flannel pod Network
+- Install Calico or Flannel pod Network (Flannel did not work on mine)
     ```
     sysctl net.bridge.bridge-nf-call-iptables=1
+    Flannel:
     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+    Calico:
+    kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
     ```
     Verify
     ```
@@ -147,15 +150,114 @@ Kubernetes on Google Cloud: https://cloud.google.com/kubernetes-engine/docs/
 https://labs.play-with-k8s.com/
 
 #### Section 20 Pods
+
+Creation see: yaml/readme-yaml-udemy.md
+
 Commands:
 ```
+kubectl run nginx --image=nginx
 kubectl describe pods
 kubectl get pods -o wide
 ```
 
 Pod Overview: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 
+#### Section 28 Controllers
 
+- Replication controller have been replaced by Replica Sets
+- Replication controller, responsible of spawning pods and keeping minimum alive. (Creates multiples instance of a Pod)
+![kubeadm](./src/main/resources/static/images/k8s-udemy/replication.png)
+
+See: yaml/rc-definition.yml
+
+![kubeadm](./src/main/resources/static/images/k8s-udemy/rcdef.png)
+
+#### ReplicaSet 
+See: yaml/replicaset-definition.yml
+
+- Scale:
+   Modify replicaset-definition.yml with this and use replace
+    ```
+    replicas: 6
+    ```
+- Commands
+    ```
+    kubectl create -f replicaset-definition.yml
+    kubectl get replicaset
+    kubectl replace -f replicaset-definition.yml
+    kubectl scale --replicas=6 -f replicaset-definition.yml
+    kubectl scale --replicas=6 replicaset myapp-replicaset #type and name
+    kubectl delete myapp-replicaset #Also delete Pods
+    ```
+    
+**Note: If you create a pod with same name manually, replicaset will delete it to keep the scale number correctly.**
+
+### Section 30 deployments
+
+Deployment is responsible of updating instances with rolling update, rollback, pause, resume.
+
+Automatically creates a replicaset 
+
+![kubeadm](./src/main/resources/static/images/k8s-udemy/deployment.png)
+
+- Commands
+    ```
+    kubectl create -f deployment-definition.yml [--record]
+    kubectl get deployments
+    kubectl get all
+    kubectl delete deployment myapp-deployment
+    ```
+
+### Section 32 update/rollback
+
+- Commands
+    ```
+    kubectl rollout status deployment/myapp-deployment
+    kubectl rollout history deployment/myapp-deployment
+    kubectl apply -f deployment-definition.yml #Will start a rollout
+    kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1
+    kubectl rollout undo deployment/myapp-deployment #Rollback
+    ```
+    
+### Section 34 Networking
+
+- IP address is assigned to a pod under the internal network. (10.244.0.0) 
+    Those IP are in the range of 10.244.x.x
+![kubeadm](./src/main/resources/static/images/k8s-udemy/podip.png)
+
+- Rules:
+  - All containers/PODs can communicate to one another without NAT
+  - All nodes can communicate with all containers and vice-versa without NAT
+
+### Section 36 Services - NodePort
+
+##### Types:
+- NodePort: A service listen to a port on the Node and forwards the request to a port on the Pod
+- ClusterIP: Creates a virtual IP inside the cluster to enable communication between different services  
+  I.e.: A set of front end servers with a set of backend servers.
+- LoadBalancer: Provisions a load balancer for the application
+![kubeadm](./src/main/resources/static/images/k8s-udemy/port.png)
+
+- To link the service to the pod, use selector with pod labels
+```
+  selector:
+    app: myapp
+    type: front-end
+```
+
+- With multiple Pods
+![kubeadm](./src/main/resources/static/images/k8s-udemy/multiple.png)
+
+- Commands
+
+```
+kubectl create -f service-definition.yml
+kubectl get services
+```
+
+### Section 38 Services - ClusterIP
+
+![kubeadm](./src/main/resources/static/images/k8s-udemy/clusterip.png)
 
 # Linguee:
 
