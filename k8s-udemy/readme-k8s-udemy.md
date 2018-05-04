@@ -81,6 +81,7 @@ Install kubeadm: https://kubernetes.io/docs/setup/independent/install-kubeadm/
     shutdown now
     ```
     - Assign static IP adresses : Global tools -> Host Network Manager
+    https://www.tecmint.com/ip-command-examples/
         - Optionally create a new Host network
         - uncheck DHCP server
         - Each Machine -> Settings -> Network -> Adapter 2
