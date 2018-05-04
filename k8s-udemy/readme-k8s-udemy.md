@@ -275,6 +275,15 @@ kubectl get services
 
 ### Section 40 Microservices
 
+Google Cloud Engine: https://cloud.google.com/kubernetes-engine/docs/quickstart
+
+- Menu -> Kubernetes Cluster -> Create Cluster -> enter names -> Create
+
+    ![shell](../src/main/resources/static/images/k8s-udemy/shell.png)
+
+- Click connect on cluster
+
+
 
 # Linguee:
 
