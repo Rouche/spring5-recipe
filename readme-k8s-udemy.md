@@ -3,6 +3,8 @@
 
 https://www.udemy.com/learn-kubernetes/learn
 
+See: ./yaml/
+
 #### Section 3 - Setup VirtualBox
 
 - Setup VirtualBox : https://www.virtualbox.org/
@@ -42,6 +44,17 @@ https://www.udemy.com/learn-kubernetes/learn
     ```
 
 #### Section 5 reference
+
+#####@Important
+To fix error:
+- The connection to the server localhost:8080 was refused - did you specify the right host or port?
+- error: the server doesn't have a resource type "cronjobs"
+```
+sudo cp /etc/kubernetes/admin.conf $HOME/ 
+sudo chown $(id -u):$(id -g) $HOME/admin.conf 
+export KUBECONFIG=$HOME/admin.conf
+```
+
 Kubernetes Documentation Site: https://kubernetes.io/docs/
 
 Kubernetes Documentation Concepts: https://kubernetes.io/docs/concepts/
