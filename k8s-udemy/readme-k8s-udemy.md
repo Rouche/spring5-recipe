@@ -3,8 +3,6 @@
 
 https://www.udemy.com/learn-kubernetes/learn
 
-See: ./yaml/
-
 #### Section 3 - Setup VirtualBox
 
 - Setup VirtualBox : https://www.virtualbox.org/
@@ -45,8 +43,10 @@ See: ./yaml/
 
 #### Section 5 reference
 
+[See YAML examples in yaml-udemy](./k8s-udemy/deployment-definition.yml)
+
 #####@Important
-To fix error:
+After restart, to fix error:
 - The connection to the server localhost:8080 was refused - did you specify the right host or port?
 - error: the server doesn't have a resource type "cronjobs"
 ```
@@ -65,7 +65,7 @@ Kubernetes Documentation - Minikube Setup: https://kubernetes.io/docs/getting-st
 
 #### Section 6 kubeadm
 
-![kubeadm](./src/main/resources/static/images/k8s-udemy/kubeadm.png)
+![kubeadm](../src/main/resources/static/images/k8s-udemy/kubeadm.png)
 
 Install kubeadm: https://kubernetes.io/docs/setup/independent/install-kubeadm/
 
@@ -84,11 +84,12 @@ Install kubeadm: https://kubernetes.io/docs/setup/independent/install-kubeadm/
         - Optionally create a new Host network
         - uncheck DHCP server
         - Each Machine -> Settings -> Network -> Adapter 2
-        ![kubeadm](./src/main/resources/static/images/k8s-udemy/network.png)
-        - ```ifconfig``` : take the new interface without IP
-        - ```ifconfig INTERFACE IP``` (enp0s8, 192.168.56.2)
+        ![network](../src/main/resources/static/images/k8s-udemy/network.png)
+        - ```ip addr show``` : take the new interface without IP
+        - ```ip addr add IP dev INTERFACE``` (ip addr add 192.168.56.5 dev enp0s8)
+        - ```ip addr del OLD_IP dev INTERFACE```
         - ```nano /etc/network/interfaces```
-        ![kubeadm](./src/main/resources/static/images/k8s-udemy/configip.png)
+        ![configip](../src/main/resources/static/images/k8s-udemy/configip.png)
         - ```reboot```
     - Disable swap
         - ```swapoff -a```
@@ -179,11 +180,11 @@ Pod Overview: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 
 - Replication controller have been replaced by Replica Sets
 - Replication controller, responsible of spawning pods and keeping minimum alive. (Creates multiples instance of a Pod)
-![kubeadm](./src/main/resources/static/images/k8s-udemy/replication.png)
+![replication](../src/main/resources/static/images/k8s-udemy/replication.png)
 
 See: yaml/rc-definition.yml
 
-![kubeadm](./src/main/resources/static/images/k8s-udemy/rcdef.png)
+![replicationcontroller](../src/main/resources/static/images/k8s-udemy/rcdef.png)
 
 #### ReplicaSet 
 See: yaml/replicaset-definition.yml
@@ -211,7 +212,7 @@ Deployment is responsible of updating instances with rolling update, rollback, p
 
 Automatically creates a replicaset 
 
-![kubeadm](./src/main/resources/static/images/k8s-udemy/deployment.png)
+![deployment](../src/main/resources/static/images/k8s-udemy/deployment.png)
 
 - Commands
     ```
@@ -236,7 +237,7 @@ Automatically creates a replicaset
 
 - IP address is assigned to a pod under the internal network. (10.244.0.0) 
     Those IP are in the range of 10.244.x.x
-![kubeadm](./src/main/resources/static/images/k8s-udemy/podip.png)
+![podip](../src/main/resources/static/images/k8s-udemy/podip.png)
 
 - Rules:
   - All containers/PODs can communicate to one another without NAT
@@ -249,7 +250,7 @@ Automatically creates a replicaset
 - ClusterIP: Creates a virtual IP inside the cluster to enable communication between different services  
   I.e.: A set of front end servers with a set of backend servers.
 - LoadBalancer: Provisions a load balancer for the application
-![kubeadm](./src/main/resources/static/images/k8s-udemy/port.png)
+![serviceport](../src/main/resources/static/images/k8s-udemy/port.png)
 
 - To link the service to the pod, use selector with pod labels
 ```
@@ -259,7 +260,7 @@ Automatically creates a replicaset
 ```
 
 - With multiple Pods
-![kubeadm](./src/main/resources/static/images/k8s-udemy/multiple.png)
+![multiplepods](../src/main/resources/static/images/k8s-udemy/multiple.png)
 
 - Commands
 
@@ -270,7 +271,10 @@ kubectl get services
 
 ### Section 38 Services - ClusterIP
 
-![kubeadm](./src/main/resources/static/images/k8s-udemy/clusterip.png)
+![clusterip](../src/main/resources/static/images/k8s-udemy/clusterip.png)
+
+### Section 40 Microservices
+
 
 # Linguee:
 

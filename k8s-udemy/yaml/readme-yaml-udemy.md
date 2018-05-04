@@ -3,7 +3,7 @@
 ## YAML Notes from Kubernetes UDEMY
 
 #### versions
-![kubeadm](../src/main/resources/static/images/k8s-udemy/version.png)
+![kubeadm](../../src/main/resources/static/images/k8s-udemy/version.png)
 
 #### Basic structure, mendatory 4 properties
 
