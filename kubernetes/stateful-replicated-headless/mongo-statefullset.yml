@@ -1,0 +1,84 @@
+#
+# https://github.com/cvallance/mongo-k8s-sidecar
+# https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/
+# https://github.com/pkdone/minikube-mongodb-demo
+#
+# After running statefulset and service
+# kubectl exec mongodb-0 -c mongod-container -- mongo --eval "rs.initiate({_id: 'MainRepSet', version: 1, members: [ {_id: 0, host: 'mongodb-0.mongodb-service.svc.cluster.local:27017'}, {_id: 1, host: 'mongodb-1.mongodb-service.svc.cluster.local:27017'}, {_id: 2, host: 'mongodb-2.mongodb-service.svc.cluster.local:27017'} ]});"
+# kubectl exec mongodb-0 -c mongod-container -- mongo --eval 'rs.status();'
+#
+# @Important
+# 2018-05-05T23:32:12.984+0000 E QUERY    [thread1] SyntaxError: identifier starts immediately after numeric literal @(shell eval):1:76
+# command terminated with exit code 252
+# This is because on windows, Quotes inside initiate() needs to be single ' and eval with "
+#
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: mongodb-service
+#  labels:
+#    name: mongo
+#spec:
+#  type: NodePort
+#  ports:
+#  - port: 27017
+#    targetPort: 27017
+#  #clusterIP: None
+#  selector:
+#    role: mongo
+#--- #Separate documents
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      role: mongo # has to match .spec.template.metadata.labels
+  serviceName: "mongodb-service"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        role: mongo
+        environment: test
+        replicaset: MainRepSet
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongod-container
+          #image: pkdone/mongo-ent:3.4
+          image: mongo
+          command:
+            - mongod
+            - "--replSet"
+            - MainRepSet
+            - "--bind_ip"
+            - 0.0.0.0
+            - "--smallfiles"
+            - "--noprealloc"
+#            - "--sslMode"
+#            - "requireSSL"
+#            - "--sslPEMKeyFile"
+#            - "/data/ssl/mongodb.pem"
+#            - "--sslAllowConnectionsWithoutCertificates"
+#            - "--sslAllowInvalidCertificates"
+#            - "--sslAllowInvalidHostnames"
+          resources:
+            requests:
+              cpu: 0.2
+              memory: 200Mi
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-persistent-storage-claim
+              mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongodb-persistent-storage-claim
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 1Gi

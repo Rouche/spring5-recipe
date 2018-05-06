@@ -1,0 +1,15 @@
+#Headless service is mendatory for Replicated statefulset
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  labels:
+    name: mongo
+spec:
+  #type: NodePort
+  ports:
+  - port: 27017
+    targetPort: 27017
+  clusterIP: None
+  selector:
+    role: mongo
