@@ -268,7 +268,8 @@ Automatically creates a replicaset
 ```
 kubectl create -f service-definition.yml
 kubectl get services
-kubectl exec -it SERVICE_NAME -c CONTAINER_NAME bash #Bash into a Pod
+#Bash into a Pod
+kubectl exec -it POD_NAME -c CONTAINER_NAME bash
 ```
 
 ### Section 38 Services - ClusterIP
