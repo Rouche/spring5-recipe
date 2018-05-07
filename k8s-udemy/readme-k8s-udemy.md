@@ -268,6 +268,7 @@ Automatically creates a replicaset
 ```
 kubectl create -f service-definition.yml
 kubectl get services
+kubectl exec -it SERVICE_NAME -c CONTAINER_NAME bash #Bash into a Pod
 ```
 
 ### Section 38 Services - ClusterIP
@@ -277,6 +278,10 @@ kubectl get services
 ### Section 40 Microservices
 
 Google Cloud Engine: https://cloud.google.com/kubernetes-engine/docs/quickstart
+
+![microservices](../src/main/resources/static/images/k8s-udemy/microservices.png)
+
+See ```./example-voting-app``` directory for yaml.
 
 - Menu -> Kubernetes Cluster -> Create Cluster -> enter names -> Create
 

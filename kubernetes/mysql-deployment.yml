@@ -38,7 +38,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - name: mysql
+      - name: mysql-container
         image: mysql
         env:
           # Use secret in real usage
