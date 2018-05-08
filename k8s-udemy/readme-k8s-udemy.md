@@ -173,6 +173,9 @@ Commands:
 kubectl run nginx --image=nginx
 kubectl describe pods
 kubectl get pods -o wide
+kubectl delete pod POD_NAME
+#Force delete pod in terminating state
+kubectl delete pod NAME --grace-period=0 --force
 ```
 
 Pod Overview: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
