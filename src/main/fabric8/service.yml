@@ -1,4 +1,8 @@
 #@Important fabric8 templates
-# see: https://github.com/rhuss/fabric8-maven-plugin/tree/master/samples/external-resources/src/main/fabric8
 spec:
   type: NodePort
+  ports:
+  - name: node
+    port: 8080
+    nodePort: 30881
+    protocol: TCP

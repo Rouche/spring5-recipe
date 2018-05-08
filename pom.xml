@@ -105,27 +105,60 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>fabric8-maven-plugin</artifactId>
-				<version>3.5.37</version>
-				<configuration>
-					<dockerHost>tcp://192.168.99.100:2376</dockerHost>
-					<certPath>C:\Users\jflar47\.minikube\certs</certPath>
-					<mode>kubernetes</mode>
-				</configuration>
-				<executions>
-					<execution>
-						<id>fabric8</id>
-						<goals>
-							<goal>resource</goal>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>k8s</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>fabric8-maven-plugin</artifactId>
+						<version>3.5.37</version>
+						<!-- @Important config -->
+						<configuration>
+							<!-- information taken from "minikube docker-env" -->
+							<dockerHost>tcp://192.168.99.100:2376</dockerHost>
+							<certPath>C:\Users\jflar47\.minikube\certs</certPath>
+							<mode>kubernetes</mode>
+							<verbose>true</verbose>
+							<!--<composeFile>src/main/docker/docker-compose.yml</composeFile>-->
+							<!-- @Important -->
+							<!-- When using custom Dockerfile, deployment.yml template needs to be provided or else -->
+							<!-- the name of the application ends up invalid -->
+							<!-- see: https://github.com/rhuss/fabric8-maven-plugin/tree/master/samples/external-resources/src/main/fabric8 -->
+							<images>
+								<image>
+									<name>${project.artifactId}:${project.version}</name>
+									<build>
+										<dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+										<!--<dockerFile>Dockerfile</dockerFile>-->
+										<!--<filter>@</filter>-->
+
+										<!--copies artficact to docker build dir in target -->
+										<assembly>
+											<descriptorRef>artifact</descriptorRef>
+										</assembly>
+									</build>
+								</image>
+							</images>
+						</configuration>
+						<executions>
+							<execution>
+								<id>fabric8</id>
+								<goals>
+									<goal>resource</goal>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<repositories>
 		<repository>
