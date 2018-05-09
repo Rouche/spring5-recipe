@@ -13,15 +13,12 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(of={"id"})
 @Slf4j
-@Entity
 @Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Recipe {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String description;
     private Integer prepTime;
@@ -30,24 +27,16 @@ public class Recipe {
     private String source;
     private String url;
 
-    @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
-    @Lob
     private String directions;
 
-    @Lob
     private Byte[] image;
 
-    @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "RECIPE_CATEGORY",
-        joinColumns = @JoinColumn(name = "RECIPE_ID"), inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {

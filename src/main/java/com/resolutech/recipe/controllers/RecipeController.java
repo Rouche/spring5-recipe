@@ -29,7 +29,7 @@ public class RecipeController {
     public String showById(@PathVariable String id, Model model) {
         log.debug("showRecipe requested");
 
-        model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.findById(id));
 
         return "recipe/show";
     }
@@ -47,7 +47,7 @@ public class RecipeController {
     public String update(@PathVariable String id, Model model) {
         log.debug("update");
 
-        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(id));
+        RecipeCommand recipeCommand = recipeService.findCommandById(id);
         model.addAttribute("recipe", recipeCommand);
 
         return RECIPE_RECIPEFORM;
@@ -74,7 +74,7 @@ public class RecipeController {
     public String delete(@PathVariable String id) {
         log.debug("delete");
 
-        recipeService.deleteById(Long.valueOf(id));
+        recipeService.deleteById(id);
 
         return "redirect:/";
     }
