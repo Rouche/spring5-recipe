@@ -3,9 +3,24 @@ spring:
     url: jdbc:mysql://192.168.99.100:30306/sfg_dev
     username: sfg_dev_user
     password: r3s0
+    platform: mysql
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: validate
+      dialect:
+        storage-engine: innodb
     database-platform: org.hibernate.dialect.MySQL57Dialect
     database: mysql
     show-sql: true
+# @Important Create the DDL schema from Mapping
+# See https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              # @Important this is relative to root of IntelliJ project (Current Working Dir) not in module.
+#              create-target: ../spring5-recipe/recipe-database-create.sql

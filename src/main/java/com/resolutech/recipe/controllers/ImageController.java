@@ -40,7 +40,7 @@ public class ImageController {
         return "redirect:/recipe/" + id + "/show";
     }
 
-    //@important return image data
+    // @important return image data
     @GetMapping("/recipe/{id}/recipeimage")
     public void getRecipeImage(@PathVariable String id, HttpServletResponse response) throws IOException {
 

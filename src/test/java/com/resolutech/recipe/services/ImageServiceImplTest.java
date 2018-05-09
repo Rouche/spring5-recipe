@@ -33,7 +33,7 @@ public class ImageServiceImplTest {
         imageService = new ImageServiceImpl(recipeRepository);
     }
 
-    //@Important test with multipart service
+    // @Important test with multipart service
     @Test
     public void saveImageFile() throws IOException {
         //Given

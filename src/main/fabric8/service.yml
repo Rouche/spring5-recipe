@@ -1,4 +1,4 @@
-#@Important fabric8 templates
+# @Important fabric8 templates
 spec:
   type: NodePort
   ports:

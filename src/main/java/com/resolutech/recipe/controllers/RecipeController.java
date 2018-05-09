@@ -53,7 +53,7 @@ public class RecipeController {
         return RECIPE_RECIPEFORM;
     }
 
-    //@Important bindingResult when going back in the form will be bound to the attibute "fields" in Thymeleaf
+    // @Important bindingResult when going back in the form will be bound to the attibute "fields" in Thymeleaf
     @PostMapping("/recipe")
     public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult) {
         log.debug("saveOrUpdate");
@@ -79,7 +79,7 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    //@Important single Exception handling
+    // @Important single Exception handling
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {

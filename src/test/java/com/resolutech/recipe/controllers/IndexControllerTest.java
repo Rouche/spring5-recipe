@@ -84,7 +84,7 @@ public class IndexControllerTest {
         //Then
         assertEquals("index", viewName);
 
-        //@Important Always attributes matchers in parameters.
+        // @Important Always attributes matchers in parameters.
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
         verify(model, times(3)).addAttribute(any(String.class), any(Object.class));
 

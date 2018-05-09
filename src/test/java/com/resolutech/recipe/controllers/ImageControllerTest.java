@@ -49,7 +49,7 @@ public class ImageControllerTest {
                 .build();
     }
 
-    //@Important test with multipart controller
+    // @Important test with multipart controller
     @Test
     public void handleImagePost() throws Exception {
         MockMultipartFile multipartFile =
