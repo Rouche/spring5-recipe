@@ -3,7 +3,6 @@ package com.resolutech.recipe.domain;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -5,6 +5,7 @@ import com.resolutech.recipe.converters.RecipeCommandToRecipe;
 import com.resolutech.recipe.converters.RecipeToRecipeCommand;
 import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.repositories.RecipeRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Ignore
 public class RecipeServiceIT {
 
     public static final String NEW_DESCRIPTION = "New Description";

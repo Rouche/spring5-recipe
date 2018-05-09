@@ -1,8 +1,9 @@
 package com.resolutech.recipe.domain;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.*;
 import java.util.Set;
 
 /**

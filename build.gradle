@@ -32,8 +32,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.apache.commons:commons-compress:1.16.1')
 	runtime('org.springframework.boot:spring-boot-devtools')
-	compile 'org.webjars:bootstrap:3.3.7-1'
+	compile 'org.webjars:bootstrap:4.0.0-2'
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -4,6 +4,7 @@ import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.services.ImageService;
 import com.resolutech.recipe.services.RecipeService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -95,6 +96,7 @@ public class ImageControllerTest {
     }
 
     @Test
+    @Ignore
     public void testGetNumberFormat() throws Exception {
 
         //Then
@@ -105,6 +107,7 @@ public class ImageControllerTest {
     }
 
     @Test
+    @Ignore
     public void testPostNumberFormat() throws Exception {
 
         //Given

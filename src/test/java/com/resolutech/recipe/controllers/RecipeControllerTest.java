@@ -5,6 +5,7 @@ import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.RecipeService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -71,6 +72,7 @@ public class RecipeControllerTest {
     }
 
     @Test
+    @Ignore
     public void testGetNumberFormat() throws Exception {
 
         //Then
