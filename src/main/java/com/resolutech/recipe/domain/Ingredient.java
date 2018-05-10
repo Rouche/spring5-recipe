@@ -1,6 +1,8 @@
 package com.resolutech.recipe.domain;
 
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
 
@@ -12,15 +14,18 @@ import java.math.BigDecimal;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Ingredient {
 
+    @Id
     private String id;
 
     private String description;
 
     private BigDecimal amount;
 
+    @DBRef
     private UnitOfMeasure uom;
 
-    private Recipe recipe;
+    //No circular with Mongo
+    //private Recipe recipe;
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
@@ -32,7 +37,7 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
-        this.recipe = recipe;
+        //this.recipe = recipe;
     }
 
 }
