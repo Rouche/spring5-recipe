@@ -61,7 +61,7 @@ public class IngredientServiceImplTest {
     @Test
     public void findByRecipeIdAndIngredientIdHappyPath() throws Exception {
         //given
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         recipe.setId(1L);
 
         Ingredient ingredient1 = new Ingredient();
@@ -96,9 +96,9 @@ public class IngredientServiceImplTest {
         command.setId(3L);
         command.setRecipeId(2L);
 
-        Optional<Recipe> recipeOptional = Optional.of(new Recipe());
+        Optional<Recipe> recipeOptional = Optional.of(Recipe.builder().build());
 
-        Recipe savedRecipe = new Recipe();
+        Recipe savedRecipe = Recipe.builder().build();
         savedRecipe.addIngredient(Ingredient.builder().id(3L).build());
 
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);

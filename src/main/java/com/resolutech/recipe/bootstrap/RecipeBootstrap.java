@@ -107,7 +107,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Category mexicanCategory = mexicanCategoryOptional.get();
 
         //Yummy Guac
-        Recipe guacRecipe = new Recipe();
+        Recipe guacRecipe = Recipe.builder().build();
         guacRecipe.setDescription("Perfect Guacamole");
         guacRecipe.setPrepTime(10);
         guacRecipe.setCookTime(0);
@@ -156,7 +156,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         recipes.add(guacRecipe);
 
         //Yummy Tacos
-        Recipe tacosRecipe = new Recipe();
+        Recipe tacosRecipe = Recipe.builder().build();
         tacosRecipe.setDescription("Spicy Grilled Chicken Taco");
         tacosRecipe.setCookTime(9);
         tacosRecipe.setPrepTime(20);

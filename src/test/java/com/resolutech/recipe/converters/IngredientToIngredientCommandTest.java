@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class IngredientToIngredientCommandTest {
 
-    public static final Recipe RECIPE = new Recipe();
+    public static final Recipe RECIPE = Recipe.builder().build();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
     public static final String DESCRIPTION = "Cheeseburger";
     public static final Long UOM_ID = new Long(2L);

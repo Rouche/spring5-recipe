@@ -1,6 +1,7 @@
 package com.resolutech.recipe.controllers;
 
 import com.resolutech.recipe.commands.RecipeCommand;
+import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.services.ImageService;
 import com.resolutech.recipe.services.RecipeService;
 import org.junit.Before;

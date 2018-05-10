@@ -41,13 +41,13 @@ public class RecipeToRecipeCommandTest {
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Recipe()));
+        assertNotNull(converter.convert(Recipe.builder().build()));
     }
 
     @Test
     public void convert() throws Exception {
         //given
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         recipe.setId(RECIPE_ID);
         recipe.setCookTime(COOK_TIME);
         recipe.setPrepTime(PREP_TIME);

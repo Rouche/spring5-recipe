@@ -43,11 +43,13 @@ public class Recipe {
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @Builder.Default
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "RECIPE_CATEGORY",
         joinColumns = @JoinColumn(name = "RECIPE_ID"), inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID"))
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {

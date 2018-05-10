@@ -2,6 +2,7 @@ package com.resolutech.recipe.controllers;
 
 import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.commands.RecipeCommand;
+import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.services.IngredientService;
 import com.resolutech.recipe.services.RecipeService;
 import com.resolutech.recipe.services.UnitOfMeasureService;

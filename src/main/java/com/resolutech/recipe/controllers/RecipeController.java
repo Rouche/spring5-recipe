@@ -1,6 +1,7 @@
 package com.resolutech.recipe.controllers;
 
 import com.resolutech.recipe.commands.RecipeCommand;
+import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
