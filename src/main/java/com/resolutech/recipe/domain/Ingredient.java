@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(of={"id", "description"})
-@ToString(exclude={"recipe"})
+//@ToString(exclude={"recipe"})
 @Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)

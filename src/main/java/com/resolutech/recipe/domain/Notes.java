@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
  */
 @Data
 @EqualsAndHashCode(of={"id"})
-@ToString(exclude={"recipe"})
+//@ToString(exclude={"recipe"})
 public class Notes {
 
     @Id
