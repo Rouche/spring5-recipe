@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Ignore
 public class UnitOfMeasureRepositoryTestIT {
 
     @Autowired
