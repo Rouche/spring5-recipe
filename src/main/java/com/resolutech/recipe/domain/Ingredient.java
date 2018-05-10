@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(of={"id", "description"})
@@ -14,8 +15,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Ingredient {
 
-    @Id
-    private String id;
+    private String id = UUID.randomUUID().toString();
 
     private String description;
 
