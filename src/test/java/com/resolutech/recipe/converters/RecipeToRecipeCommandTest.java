@@ -47,7 +47,7 @@ public class RecipeToRecipeCommandTest {
     @Test
     public void convert() throws Exception {
         //given
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         recipe.setId(RECIPE_ID);
         recipe.setCookTime(COOK_TIME);
         recipe.setPrepTime(PREP_TIME);
