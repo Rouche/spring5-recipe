@@ -4,7 +4,11 @@ import com.resolutech.recipe.domain.*;
 import com.resolutech.recipe.repositories.CategoryRepository;
 import com.resolutech.recipe.repositories.RecipeRepository;
 import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
+import com.resolutech.recipe.repositories.reactive.CategoryReactiveRepository;
+import com.resolutech.recipe.repositories.reactive.RecipeReactiveRepository;
+import com.resolutech.recipe.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -26,6 +30,15 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository uomRepository;
 
+    //JF: Should be removed its just for the test UnitOfMeasureRepositoryTestIT to pass.
+    //But keeping it there for the example.
+    @Autowired
+    public UnitOfMeasureReactiveRepository uomReactiveRepository;
+    @Autowired
+    public CategoryReactiveRepository categoryReactiveRepository;
+    @Autowired
+    public RecipeReactiveRepository recipeReactiveRepository;
+
     public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository uomRepository) {
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
@@ -34,10 +47,16 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
         loadUom();
         loadCategories();
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading Bootstrap Data");
+
+        log.error("########");
+        log.error("Count UnitOfMeasure: " + uomReactiveRepository.count().block().toString());
+        log.error("Count Category: " + categoryReactiveRepository.count().block().toString());
+        log.error("Count Recipe: " + recipeReactiveRepository.count().block().toString());
     }
 
     private List<Recipe> getRecipes() {

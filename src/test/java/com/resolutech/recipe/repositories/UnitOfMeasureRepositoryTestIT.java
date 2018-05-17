@@ -2,6 +2,9 @@ package com.resolutech.recipe.repositories;
 
 import com.resolutech.recipe.bootstrap.RecipeBootstrap;
 import com.resolutech.recipe.domain.UnitOfMeasure;
+import com.resolutech.recipe.repositories.reactive.CategoryReactiveRepository;
+import com.resolutech.recipe.repositories.reactive.RecipeReactiveRepository;
+import com.resolutech.recipe.repositories.reactive.UnitOfMeasureReactiveRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +34,14 @@ public class UnitOfMeasureRepositoryTestIT {
     @Autowired
     CategoryRepository categoryRepository;
 
+    //JF: @See RecipeBootstrap for explanation why its there
+    @Autowired
+    UnitOfMeasureReactiveRepository uomReactiveRepository;
+    @Autowired
+    CategoryReactiveRepository categoryReactiveRepository;
+    @Autowired
+    RecipeReactiveRepository recipeReactiveRepository;
+
     RecipeBootstrap recipeBootstrap;
 
     @Before
@@ -43,6 +54,9 @@ public class UnitOfMeasureRepositoryTestIT {
 
 
         recipeBootstrap = new RecipeBootstrap(categoryRepository, recipeRepository, uomRepository);
+        recipeBootstrap.categoryReactiveRepository = categoryReactiveRepository;
+        recipeBootstrap.uomReactiveRepository = uomReactiveRepository;
+        recipeBootstrap.recipeReactiveRepository = recipeReactiveRepository;
         recipeBootstrap.onApplicationEvent(null);
     }
 
@@ -61,4 +75,5 @@ public class UnitOfMeasureRepositoryTestIT {
 
         assertEquals("Cup", uomOfMeasure.get().getDescription());
 
-    }}
+    }
+}
