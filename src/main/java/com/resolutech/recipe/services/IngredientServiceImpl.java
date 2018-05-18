@@ -11,6 +11,7 @@ import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public IngredientCommand findByRecipeIdAndIngredientId(String recipeId, String ingredientId) {
+    public Mono<IngredientCommand> findByRecipeIdAndIngredientId(String recipeId, String ingredientId) {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
 
@@ -55,19 +56,19 @@ public class IngredientServiceImpl implements IngredientService {
             throw new RuntimeException("Ingredient id not found: " + ingredientId);
         }
 
-        return ingredientCommandOptional.get();
+        return Mono.just(ingredientCommandOptional.get());
     }
 
     @Override
     @Transactional
-    public IngredientCommand saveIngredientCommand(IngredientCommand command) {
+    public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(command.getRecipeId());
 
         if(!recipeOptional.isPresent()){
 
             //todo toss error if not found!
             log.error("Recipe not found for id: " + command.getRecipeId());
-            return new IngredientCommand();
+            return Mono.just(new IngredientCommand());
         } else {
             Recipe recipe = recipeOptional.get();
 
@@ -108,12 +109,36 @@ public class IngredientServiceImpl implements IngredientService {
             }
 
             //to do check for fail
-            return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+            return Mono.just(ingredientToIngredientCommand.convert(savedIngredientOptional.get()));
         }
     }
 
     @Override
-    public void deleteById(String id) {
-        ingredientRepository.deleteById(id);
+    public Mono<Void> deleteById(String recipeId, String id) {
+        log.debug("Deleting ingredient: " + recipeId + ":" + id);
+
+        //Ugly way to delete because its not a @DBRef
+        Recipe recipe = recipeRepository.findById(recipeId).get();
+
+        if(recipe != null){
+
+            log.debug("found recipe");
+
+            Optional<Ingredient> ingredientOptional = recipe
+                    .getIngredients()
+                    .stream()
+                    .filter(ingredient -> ingredient.getId().equals(id))
+                    .findFirst();
+
+            if(ingredientOptional.isPresent()){
+                log.debug("found Ingredient");
+
+                recipe.getIngredients().remove(ingredientOptional.get());
+                recipeRepository.save(recipe);
+            }
+        } else {
+            log.debug("Recipe Id Not found. Id:" + recipeId);
+        }
+        return Mono.empty();
     }
 }

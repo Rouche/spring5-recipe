@@ -39,6 +39,8 @@ public class Recipe {
 
     private Notes notes;
 
+    // @Important Lombok if you want your collections to be by default initialized with a size of zero vs defaulting to null,
+    // annotate it with @Singular when using @Builder.
     @Builder.Default
     private Set<Ingredient> ingredients = new HashSet<>();
 

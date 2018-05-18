@@ -25,20 +25,22 @@ public class Ingredient {
     @DBRef
     private UnitOfMeasure uom;
 
-    //No circular with Mongo
-    //private Recipe recipe;
+    // @Important No circular with Mongo
+    // private Recipe recipe;
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-    }
-
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-        //this.recipe = recipe;
-    }
+    // @Important Because of the @Builder.Default, the id do not get initialized in this constructor.
+    // Once you use Lombok Builder, you have no choice to use the Builder everywhere.
+//    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+//        this.description = description;
+//        this.amount = amount;
+//        this.uom = uom;
+//    }
+//
+//    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+//        this.description = description;
+//        this.amount = amount;
+//        this.uom = uom;
+//        //this.recipe = recipe;
+//    }
 
 }

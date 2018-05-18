@@ -1,12 +1,13 @@
 package com.resolutech.recipe.services;
 
 import com.resolutech.recipe.commands.IngredientCommand;
+import reactor.core.publisher.Mono;
 
 public interface IngredientService {
 
-    IngredientCommand findByRecipeIdAndIngredientId(String recipeId, String id);
+    Mono<IngredientCommand> findByRecipeIdAndIngredientId(String recipeId, String id);
 
-    IngredientCommand saveIngredientCommand(IngredientCommand ingredientCommand);
+    Mono<IngredientCommand> saveIngredientCommand(IngredientCommand ingredientCommand);
 
-    void deleteById(String id);
+    Mono<Void> deleteById(String recipeId, String id);
 }
