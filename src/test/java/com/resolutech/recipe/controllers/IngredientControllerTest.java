@@ -15,9 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import reactor.core.publisher.Flux;
 
-import java.util.HashSet;
-
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -141,8 +138,7 @@ public class IngredientControllerTest {
     @Test
     public void deleteById() throws Exception {
         //Given
-        Long id = 2L;
-
+        //Long id = 2L;
 
         mockMvc.perform(get("/recipe/1/ingredient/2/delete"))
             .andExpect(status().is3xxRedirection())
