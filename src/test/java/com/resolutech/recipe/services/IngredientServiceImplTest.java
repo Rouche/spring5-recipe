@@ -117,13 +117,20 @@ public class IngredientServiceImplTest {
 
     @Test
     public void deleteById() {
-        //Given
-        String id = "2L";
+        //given
+        Recipe recipe = Recipe.builder().build();
+        Ingredient ingredient = Ingredient.builder().build();
+        ingredient.setId("3");
+        recipe.addIngredient(ingredient);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
 
-        //When
-        ingredientService.deleteById(id, id);
+        when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
-        //Then
-        verify(ingredientRepository, times(1)).deleteById(id);
+        //when
+        ingredientService.deleteById("1", "3");
+
+        //then
+        verify(recipeRepository, times(1)).findById(anyString());
+        verify(recipeRepository, times(1)).save(any(Recipe.class));
     }
 }
