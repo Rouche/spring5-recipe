@@ -56,7 +56,10 @@ public class IngredientServiceImpl implements IngredientService {
             throw new RuntimeException("Ingredient id not found: " + ingredientId);
         }
 
-        return Mono.just(ingredientCommandOptional.get());
+        IngredientCommand ingredientCommand = ingredientCommandOptional.get();
+        ingredientCommand.setRecipeId(recipeId);
+
+        return Mono.just(ingredientCommand);
     }
 
     @Override
@@ -95,7 +98,7 @@ public class IngredientServiceImpl implements IngredientService {
             Recipe savedRecipe = recipeRepository.save(recipe);
 
             Optional<Ingredient> savedIngredientOptional = savedRecipe.getIngredients().stream()
-                    .filter(recipeIngredients -> recipeIngredients.getId().equals(command.getId()))
+                    .filter(recipeIngredient -> recipeIngredient.getId().equals(command.getId()))
                     .findFirst();
 
             //check by description
@@ -109,7 +112,10 @@ public class IngredientServiceImpl implements IngredientService {
             }
 
             //to do check for fail
-            return Mono.just(ingredientToIngredientCommand.convert(savedIngredientOptional.get()));
+            IngredientCommand ingredientCommandSaved = ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+            ingredientCommandSaved.setRecipeId(recipe.getId());
+
+            return Mono.just(ingredientCommandSaved);
         }
     }
 
