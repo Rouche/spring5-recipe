@@ -3,8 +3,6 @@ package com.resolutech.recipe.controllers;
 import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.commands.UnitOfMeasureCommand;
-import com.resolutech.recipe.domain.Ingredient;
-import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.services.IngredientService;
 import com.resolutech.recipe.services.RecipeService;
 import com.resolutech.recipe.services.UnitOfMeasureService;
@@ -17,8 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
