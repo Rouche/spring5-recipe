@@ -11,8 +11,6 @@ import java.util.UUID;
 @EqualsAndHashCode(of={"id", "description"})
 //@ToString(exclude={"recipe"})
 @Builder
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Ingredient {
 
     @Builder.Default

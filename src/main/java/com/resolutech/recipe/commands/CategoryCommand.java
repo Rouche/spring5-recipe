@@ -9,6 +9,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+// @Important no args are required public because of Thymeleaf
 @NoArgsConstructor
 public class CategoryCommand {
     private String id;

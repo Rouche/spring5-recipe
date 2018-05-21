@@ -2,6 +2,7 @@ package com.resolutech.recipe.converters;
 
 import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.domain.Ingredient;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -25,8 +26,10 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
             return null;
         }
 
-        final Ingredient ingredient = new Ingredient();
-        ingredient.setId(source.getId());
+        final Ingredient ingredient = Ingredient.builder().build();
+        if(StringUtils.isNotBlank(source.getId())) {
+            ingredient.setId(source.getId());
+        }
         ingredient.setAmount(source.getAmount());
         ingredient.setDescription(source.getDescription());
         ingredient.setUom(uomConverter.convert(source.getUom()));

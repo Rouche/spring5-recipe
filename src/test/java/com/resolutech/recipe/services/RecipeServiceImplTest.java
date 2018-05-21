@@ -40,7 +40,7 @@ public class RecipeServiceImplTest {
 
     @Test
     public void getRecipeByIdTest() throws Exception {
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         recipe.setId("1L");
 
         Optional<Recipe> recipeOptional = Optional.of(recipe);
@@ -68,7 +68,7 @@ public class RecipeServiceImplTest {
     @Test
     public void getRecipesTest() throws Exception {
 
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         HashSet receipesData = new HashSet();
         receipesData.add(recipe);
 

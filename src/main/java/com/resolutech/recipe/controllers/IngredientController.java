@@ -55,7 +55,7 @@ public class IngredientController {
         //todo raise exception if null
 
         //need to return back parent id for hidden form property
-        IngredientCommand ingredientCommand = new IngredientCommand();
+        IngredientCommand ingredientCommand = IngredientCommand.builder().build();
         ingredientCommand.setRecipeId(recipeCommand.getId());
         model.addAttribute("ingredient", ingredientCommand);
 

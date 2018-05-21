@@ -10,14 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @Important When using Builder we have to tell Lombok to generate both No Args and All Args
+ * @Important When using Builder we have to tell Lombok to generate both NoArgsConstructor and AllArgsConstructor
+ * Note: @XXXXConstructor should never be used because it exposes creation with new that bypasses @Builder.Default
  */
 @Data
 @EqualsAndHashCode(of={"id"})
 @Slf4j
 @Builder
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Document
 public class Recipe {
 

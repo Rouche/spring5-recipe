@@ -41,7 +41,7 @@ public class RecipeToRecipeCommandTest {
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new Recipe()));
+        assertNotNull(converter.convert(Recipe.builder().build()));
     }
 
     @Test
@@ -72,10 +72,10 @@ public class RecipeToRecipeCommandTest {
         recipe.getCategories().add(category);
         recipe.getCategories().add(category2);
 
-        Ingredient ingredient = new Ingredient();
+        Ingredient ingredient = Ingredient.builder().build();
         ingredient.setId(INGRED_ID_1);
 
-        Ingredient ingredient2 = new Ingredient();
+        Ingredient ingredient2 = Ingredient.builder().build();
         ingredient2.setId(INGRED_ID_2);
 
         recipe.getIngredients().add(ingredient);

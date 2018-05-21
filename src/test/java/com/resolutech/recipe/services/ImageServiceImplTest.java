@@ -41,7 +41,7 @@ public class ImageServiceImplTest {
         String id = "1L";
         MultipartFile multipartFile = new MockMultipartFile("imagefile", "test.txt", "text/plain", "My mock".getBytes());
 
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         recipe.setId(id);
         Optional<Recipe> recipeOptional = Optional.of(recipe);
 

@@ -65,7 +65,7 @@ public class IngredientControllerTest {
     @Test
     public void testShowIngredient() throws Exception {
         //given
-        IngredientCommand ingredientCommand = new IngredientCommand();
+        IngredientCommand ingredientCommand = IngredientCommand.builder().build();
 
         //When
         when(ingredientService.findByRecipeIdAndIngredientId(anyString(), anyString())).thenReturn(Mono.just(ingredientCommand));
@@ -101,7 +101,7 @@ public class IngredientControllerTest {
     @Test
     public void testUpdate() throws Exception {
         //given
-        IngredientCommand ingredientCommand = new IngredientCommand();
+        IngredientCommand ingredientCommand = IngredientCommand.builder().build();
 
         when(ingredientService.findByRecipeIdAndIngredientId(anyString(), anyString())).thenReturn(Mono.just(ingredientCommand));
         when(unitOfMeasureService.listAllUoms()).thenReturn(Flux.just(new UnitOfMeasureCommand()));
@@ -117,7 +117,7 @@ public class IngredientControllerTest {
     @Test
     public void testSaveOrUpdate() throws Exception {
         //given
-        IngredientCommand command = new IngredientCommand();
+        IngredientCommand command = IngredientCommand.builder().build();
         command.setId("3L");
         command.setRecipeId("2L");
 

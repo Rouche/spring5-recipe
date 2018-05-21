@@ -51,6 +51,7 @@ public class IngredientServiceImpl implements IngredientService {
                 .single()
                 .map( ingredient -> {
                     IngredientCommand command = ingredientToIngredientCommand.convert(ingredient);
+                    command.setRecipeId(recipeId);
                     return command;
                 });
 
@@ -97,7 +98,7 @@ public class IngredientServiceImpl implements IngredientService {
 
             //todo toss error if not found!
             log.error("Recipe not found for id: " + command.getRecipeId());
-            return Mono.just(new IngredientCommand());
+            return Mono.just(IngredientCommand.builder().build());
         } else {
             Recipe recipe = recipeOptional.get();
 

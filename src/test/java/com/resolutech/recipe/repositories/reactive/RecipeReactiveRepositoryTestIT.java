@@ -35,7 +35,7 @@ public class RecipeReactiveRepositoryTestIT {
     public void testSaverecipe() {
 
         //Given
-        Recipe recipe = new Recipe();
+        Recipe recipe = Recipe.builder().build();
         recipe.setDescription(EVERYTHING);
 
         //When
