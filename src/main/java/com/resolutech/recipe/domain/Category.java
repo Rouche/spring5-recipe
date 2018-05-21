@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Set;
 
 /**
  * @Important section 221 mongo
@@ -24,7 +21,8 @@ public class Category {
 
     private String description;
 
-    @DBRef
-    private Set<Recipe> recipes;
+// https://jira.spring.io/browse/DATAMONGO-1584
+//    @DBRef
+//    private Set<Recipe> recipes;
 
 }

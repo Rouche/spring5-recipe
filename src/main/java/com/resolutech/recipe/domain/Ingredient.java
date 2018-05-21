@@ -1,8 +1,8 @@
 package com.resolutech.recipe.domain;
 
-import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -20,7 +20,7 @@ public class Ingredient {
 
     private BigDecimal amount;
 
-    @DBRef
+//    @DBRef
     private UnitOfMeasure uom;
 
     // @Important No circular with Mongo

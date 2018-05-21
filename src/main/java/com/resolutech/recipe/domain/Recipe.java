@@ -43,7 +43,7 @@ public class Recipe {
     @Builder.Default
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @DBRef
+//    @DBRef
     @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
