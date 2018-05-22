@@ -8,10 +8,6 @@ import com.resolutech.recipe.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.resolutech.recipe.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.resolutech.recipe.domain.Ingredient;
 import com.resolutech.recipe.domain.Recipe;
-import com.resolutech.recipe.domain.UnitOfMeasure;
-import com.resolutech.recipe.repositories.IngredientRepository;
-import com.resolutech.recipe.repositories.RecipeRepository;
-import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import com.resolutech.recipe.repositories.reactive.IngredientReactiveRepository;
 import com.resolutech.recipe.repositories.reactive.RecipeReactiveRepository;
 import com.resolutech.recipe.repositories.reactive.UnitOfMeasureReactiveRepository;
@@ -21,15 +17,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class IngredientServiceImplTest {
 
