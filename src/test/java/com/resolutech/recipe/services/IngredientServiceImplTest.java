@@ -39,8 +39,8 @@ public class IngredientServiceImplTest {
     @Mock
     RecipeReactiveRepository recipeReactiveRepository;
 
-    @Mock
-    RecipeRepository recipeRepository;
+//    @Mock
+//    RecipeRepository recipeRepository;
 
     @Mock
     UnitOfMeasureReactiveRepository unitOfMeasureRepository;
@@ -62,7 +62,7 @@ public class IngredientServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient, recipeRepository,
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient,
                 recipeReactiveRepository, ingredientReactiveRepository, unitOfMeasureRepository);
     }
 
@@ -112,12 +112,12 @@ public class IngredientServiceImplTest {
         command.getUom().setId("1234");
 
 
-        Optional<Recipe> recipeOptional = Optional.of(Recipe.builder().build());
+        Mono<Recipe> recipeMono = Mono.just(Recipe.builder().build());
 
         Recipe savedRecipe = Recipe.builder().build();
         savedRecipe.addIngredient(Ingredient.builder().id("3L").build());
 
-        when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
+        when(recipeReactiveRepository.findById(anyString())).thenReturn(recipeMono);
         when(recipeReactiveRepository.save(any())).thenReturn(Mono.just(savedRecipe));
 
         //when
@@ -125,7 +125,7 @@ public class IngredientServiceImplTest {
 
         //then
         assertEquals("3L", savedCommand.getId());
-        verify(recipeRepository, times(1)).findById(anyString());
+        verify(recipeReactiveRepository, times(1)).findById(anyString());
         verify(recipeReactiveRepository, times(1)).save(any(Recipe.class));
 
     }
@@ -133,19 +133,20 @@ public class IngredientServiceImplTest {
     @Test
     public void deleteById() {
         //given
-        Recipe recipe = Recipe.builder().build();
+        Recipe recipe = Recipe.builder().id("1").build();
         Ingredient ingredient = Ingredient.builder().build();
         ingredient.setId("3");
         recipe.addIngredient(ingredient);
-        Optional<Recipe> recipeOptional = Optional.of(recipe);
+        Mono<Recipe> recipeMono = Mono.just(recipe);
 
-        when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
+        when(recipeReactiveRepository.findById(anyString())).thenReturn(recipeMono);
+        when(recipeReactiveRepository.save(recipe)).thenReturn(recipeMono);
 
         //when
-        ingredientService.deleteById("1", "3");
+        ingredientService.deleteById("1", "3").block();
 
         //then
-        verify(recipeRepository, times(1)).findById(anyString());
-        verify(recipeRepository, times(1)).save(any(Recipe.class));
+        verify(recipeReactiveRepository, times(1)).findById(anyString());
+        verify(recipeReactiveRepository, times(1)).save(any(Recipe.class));
     }
 }
