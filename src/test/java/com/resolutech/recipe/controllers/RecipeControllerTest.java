@@ -142,10 +142,11 @@ public class RecipeControllerTest {
     public void testDelete() throws Exception {
 
         //Given
-        Long id = 1L;
+        String id = "1L";
+        when(recipeService.deleteById(id)).thenReturn(Mono.empty());
 
         //Then
-        mockMvc.perform(get("/recipe/1/delete"))
+        mockMvc.perform(get("/recipe/1L/delete"))
             .andExpect(status().is3xxRedirection())
             .andExpect(view().name("redirect:/"));
     }
