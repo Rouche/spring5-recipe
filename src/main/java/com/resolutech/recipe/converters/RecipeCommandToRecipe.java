@@ -3,6 +3,7 @@ package com.resolutech.recipe.converters;
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.domain.Recipe;
 import lombok.Synchronized;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,9 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         }
 
         final Recipe recipe = Recipe.builder().build();
-        recipe.setId(source.getId());
+        if(StringUtils.isNotBlank(source.getId())) {
+            recipe.setId(source.getId());
+        }
         recipe.setCookTime(source.getCookTime());
         recipe.setPrepTime(source.getPrepTime());
         recipe.setDescription(source.getDescription());

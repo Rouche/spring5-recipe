@@ -1,7 +1,9 @@
 package com.resolutech.recipe.converters;
 
+import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.domain.Category;
+import com.resolutech.recipe.domain.Ingredient;
 import com.resolutech.recipe.domain.Recipe;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -53,7 +55,11 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
 
         if (source.getIngredients() != null && source.getIngredients().size() > 0){
             source.getIngredients()
-                    .forEach(ingredient -> command.getIngredients().add(ingredientConverter.convert(ingredient)));
+                    .forEach(ingredient -> {
+                        IngredientCommand ingredientCommand = ingredientConverter.convert(ingredient);
+                        ingredientCommand.setRecipeId(source.getId());
+                        command.getIngredients().add(ingredientCommand);
+                    });
         }
 
         return command;

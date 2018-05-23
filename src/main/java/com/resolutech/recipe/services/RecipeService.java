@@ -2,15 +2,17 @@ package com.resolutech.recipe.services;
 
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.domain.Recipe;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.Set;
+import java.util.List;
 
 public interface RecipeService {
 
-    Set<Recipe> getRecipes();
+    Flux<Recipe> getRecipes();
 
-    Recipe findById(String id);
-    RecipeCommand saveRecipeCommand(RecipeCommand command);
-    RecipeCommand findCommandById(String l);
-    void deleteById(String id);
+    Mono<Recipe> findById(String id);
+    Mono<RecipeCommand> saveRecipeCommand(RecipeCommand command);
+    Mono<RecipeCommand> findCommandById(String l);
+    Mono<Void> deleteById(String id);
 }

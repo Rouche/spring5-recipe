@@ -15,10 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
+import reactor.core.publisher.Flux;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -60,6 +59,8 @@ public class IndexControllerTest {
     public void testMockMVC() throws Exception {
         MockMvc mockMVC = MockMvcBuilders.standaloneSetup(indexController).build();
 
+        when(recipeService.getRecipes()).thenReturn(Flux.empty());
+
         mockMVC.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(MockMvcResultMatchers.view().name("index"));
@@ -69,14 +70,14 @@ public class IndexControllerTest {
     public void getIndexPage() {
 
         //Given
-        Set<Recipe> recipes = new HashSet<>();
+        List<Recipe> recipes = new ArrayList<>();
         recipes.add(Recipe.builder().id("1").build());
         recipes.add(Recipe.builder().id("2").build());
 
-        when(recipeService.getRecipes()).thenReturn(recipes);
+        when(recipeService.getRecipes()).thenReturn(Flux.fromIterable(recipes));
 
         @SuppressWarnings("unchecked")
-        ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+        ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
 
         //When
         String viewName = indexController.getIndexPage(model);
@@ -90,8 +91,8 @@ public class IndexControllerTest {
 
         verify(recipeService, times(1)).getRecipes();
 
-        Set<Recipe> set = argumentCaptor.getValue();
+        List<Recipe> recipeList = argumentCaptor.getValue();
 
-        assertEquals(2, set.size());
+        assertEquals(2, recipeList.size());
     }
 }

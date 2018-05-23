@@ -1,6 +1,7 @@
 package com.resolutech.recipe.controllers;
 
 import com.resolutech.recipe.commands.RecipeCommand;
+import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,13 @@ public class RecipeController {
     public String showById(@PathVariable String id, Model model) {
         log.debug("showRecipe requested");
 
-        model.addAttribute("recipe", recipeService.findById(id));
+        Recipe recipe = recipeService.findById(id).block();
+
+        if(recipe == null) {
+            throw new NotFoundException("Recipe not found for ID: [" + id + "]");
+        }
+
+        model.addAttribute("recipe", recipe);
 
         return "recipe/show";
     }
@@ -47,7 +54,7 @@ public class RecipeController {
     public String update(@PathVariable String id, Model model) {
         log.debug("update");
 
-        RecipeCommand recipeCommand = recipeService.findCommandById(id);
+        RecipeCommand recipeCommand = recipeService.findCommandById(id).block();
         model.addAttribute("recipe", recipeCommand);
 
         return RECIPE_RECIPEFORM;
@@ -65,7 +72,7 @@ public class RecipeController {
 
             return RECIPE_RECIPEFORM;
         }
-        RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
+        RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand).block();
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
@@ -74,12 +81,12 @@ public class RecipeController {
     public String delete(@PathVariable String id) {
         log.debug("delete");
 
-        recipeService.deleteById(id);
+        recipeService.deleteById(id).block();
 
         return "redirect:/";
     }
 
-    // @Important single Exception handling
+    // @Important single Exception handling that are thrown inside this Controller
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception) {

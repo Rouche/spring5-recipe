@@ -37,7 +37,7 @@ public class IndexController {
         model.addAttribute("category", category.get());
         model.addAttribute("uom", uom.get());
 
-        model.addAttribute("recipes", recipeService.getRecipes());
+        model.addAttribute("recipes", recipeService.getRecipes().collectList().block());
 
         log.debug("Cat ID: " + category.get().getId());
         log.debug("Uom ID: " + uom.get().getId());
