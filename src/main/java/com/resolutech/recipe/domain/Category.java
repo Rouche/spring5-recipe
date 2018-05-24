@@ -1,8 +1,6 @@
 package com.resolutech.recipe.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Always exclude Lazy collection with Lombok automatic generation
  */
 @Data
-@EqualsAndHashCode(exclude={"recipes"})
-@ToString(exclude={"recipes"})
+//@EqualsAndHashCode(exclude={"recipes"})
+//@ToString(exclude={"recipes"})
 @Document
 public class Category {
 

@@ -12,6 +12,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import reactor.core.publisher.Mono;
 
@@ -55,14 +56,21 @@ public class ImageControllerTest {
     // @Important test with multipart controller
     @Test
     public void handleImagePost() throws Exception {
+        //Given
         MockMultipartFile multipartFile =
                 new MockMultipartFile("imagefile", "testing.txt", "text/plain",
                         "Spring Framework Guru".getBytes());
 
-        mockMvc.perform(multipart("/recipe/1/image").file(multipartFile))
+        when(imageService.saveImageFile("1", multipartFile)).thenReturn(Mono.empty());
+
+        //When
+        MockMultipartHttpServletRequestBuilder mmb = multipart("/recipe/1/image");
+        mmb = mmb.file(multipartFile);
+        mockMvc.perform(mmb)
                 .andExpect(status().is3xxRedirection())
                 .andExpect(header().string("Location", "/recipe/1/show"));
 
+        //Then
         verify(imageService, times(1)).saveImageFile(anyString(), any());
     }
 
