@@ -5,11 +5,14 @@ import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.exceptions.TemplateInputException;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
@@ -98,9 +101,10 @@ public class RecipeController {
     }
 
     // @Important single Exception handling that are thrown inside this Controller
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ExceptionHandler(NotFoundException.class)
-//    public ModelAndView handleNotFound(Exception exception) {
-//        return ErrorUtils.getErrorView(exception, "404 Not found");
-//    }
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    // So so exception handling... TemplateInputException is imo too generic
+    @ExceptionHandler({NotFoundException.class, TemplateInputException.class})
+    public String handleNotFound(Exception exception, Model model) {
+        return ErrorUtils.getErrorView(model, exception, "404 Not found");
+    }
 }

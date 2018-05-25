@@ -3,15 +3,19 @@ package com.resolutech.recipe.controllers;
 import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.commands.UnitOfMeasureCommand;
+import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.IngredientService;
 import com.resolutech.recipe.services.RecipeService;
 import com.resolutech.recipe.services.UnitOfMeasureService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.exceptions.TemplateInputException;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -71,8 +75,6 @@ public class IngredientController {
         ingredientCommand.setRecipeId(recipeCommand.getId());
         model.addAttribute("ingredient", ingredientCommand);
 
-        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
-
         //init uom
         ingredientCommand.setUom(new UnitOfMeasureCommand());
 
@@ -85,8 +87,6 @@ public class IngredientController {
 
         // use command object to avoid lazy load errors in Thymeleaf.
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id).block());
-
-        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 
         return INGREDIENT_FORM;
     }
@@ -103,7 +103,6 @@ public class IngredientController {
                 log.debug(error.toString());
             });
 
-            model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
             return INGREDIENT_FORM;
         }
 
@@ -119,6 +118,18 @@ public class IngredientController {
         ingredientService.deleteById(recipeId, id).block();
 
         return "redirect:/recipe/" + recipeId + "/ingredients";
+    }
+
+    // @Important always populated on every requests
+    @ModelAttribute("uomList")
+    public Flux<UnitOfMeasureCommand> populateUomList() {
+        return unitOfMeasureService.listAllUoms();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({NotFoundException.class, TemplateInputException.class})
+    public String handleNotFound(Exception exception, Model model) {
+        return ErrorUtils.getErrorView(model, exception, "404 Not found");
     }
 }
 
