@@ -9,15 +9,21 @@ import com.resolutech.recipe.services.UnitOfMeasureService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Controller
 public class IngredientController {
 
+    private static final String INGREDIENT_FORM = "recipe/ingredient/ingredientform";
+
     private RecipeService recipeService;
     private IngredientService ingredientService;
     private UnitOfMeasureService unitOfMeasureService;
+    private WebDataBinder webDataBinder;
 
     public IngredientController(RecipeService recipeService, IngredientService ingredientService, UnitOfMeasureService unitOfMeasureService) {
         this.recipeService = recipeService;
@@ -25,12 +31,18 @@ public class IngredientController {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
+    // @Important multiple data binder on post. Have to be specific.
+    @InitBinder("ingredient")
+    public void initBinder(WebDataBinder webDataBinder) {
+        this.webDataBinder = webDataBinder;
+    }
+
     @GetMapping("/recipe/{recipeId}/ingredients")
     public String listIngredients(@PathVariable String recipeId, Model model){
         log.debug("Getting ingredient list for recipe id: " + recipeId);
 
         // use command object to avoid lazy load errors in Thymeleaf.
-        RecipeCommand recipe = recipeService.findCommandById(recipeId).block();
+        Mono<RecipeCommand> recipe = recipeService.findCommandById(recipeId);
         model.addAttribute("recipe", recipe);
 
         return "recipe/ingredient/list";
@@ -41,7 +53,7 @@ public class IngredientController {
         log.debug("Getting ingredient for recipe id: " + recipeId + " id: " + id);
 
         // use command object to avoid lazy load errors in Thymeleaf.
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id).block());
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id));
 
         return "recipe/ingredient/show";
     }
@@ -59,12 +71,12 @@ public class IngredientController {
         ingredientCommand.setRecipeId(recipeCommand.getId());
         model.addAttribute("ingredient", ingredientCommand);
 
-        model.addAttribute("uomList", unitOfMeasureService.listAllUoms().collectList().block());
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 
         //init uom
         ingredientCommand.setUom(new UnitOfMeasureCommand());
 
-        return "recipe/ingredient/ingredientform";
+        return INGREDIENT_FORM;
     }
 
     @GetMapping("/recipe/{recipeId}/ingredient/{id}/update")
@@ -74,14 +86,26 @@ public class IngredientController {
         // use command object to avoid lazy load errors in Thymeleaf.
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id).block());
 
-        model.addAttribute("uomList", unitOfMeasureService.listAllUoms().collectList().block());
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 
-        return "recipe/ingredient/ingredientform";
+        return INGREDIENT_FORM;
     }
 
     @PostMapping("/recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@PathVariable String recipeId, @ModelAttribute IngredientCommand ingredientCommand) {
+    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand ingredientCommand, @PathVariable String recipeId,  Model model) {
         log.debug("saveOrUpdate ingredient id:" + ingredientCommand.getId());
+
+        webDataBinder.validate();
+        BindingResult bindingResult =  webDataBinder.getBindingResult();
+
+        if(bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach( error -> {
+                log.debug(error.toString());
+            });
+
+            model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+            return INGREDIENT_FORM;
+        }
 
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(ingredientCommand).block();
 

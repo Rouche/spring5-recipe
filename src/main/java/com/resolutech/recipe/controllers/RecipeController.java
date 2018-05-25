@@ -5,12 +5,12 @@ import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.exceptions.NotFoundException;
 import com.resolutech.recipe.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
@@ -22,15 +22,22 @@ public class RecipeController {
 
     private RecipeService recipeService;
 
+    private WebDataBinder webDataBinder;
+
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder) {
+        this.webDataBinder = webDataBinder;
     }
 
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model) {
         log.debug("showRecipe requested");
 
-        Recipe recipe = recipeService.findById(id).block();
+        Mono<Recipe> recipe = recipeService.findById(id);
 
         if(recipe == null) {
             throw new NotFoundException("Recipe not found for ID: [" + id + "]");
@@ -62,8 +69,12 @@ public class RecipeController {
 
     // @Important bindingResult when going back in the form will be bound to the attibute "fields" in Thymeleaf
     @PostMapping("/recipe")
-    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult) {
+    //public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult bindingResult) {
+    public String saveOrUpdate(@ModelAttribute("recipe") RecipeCommand recipeCommand) {
+
         log.debug("saveOrUpdate");
+        webDataBinder.validate();
+        BindingResult bindingResult =  webDataBinder.getBindingResult();
 
         if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach( error -> {
@@ -87,9 +98,9 @@ public class RecipeController {
     }
 
     // @Important single Exception handling that are thrown inside this Controller
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public ModelAndView handleNotFound(Exception exception) {
-        return ErrorUtils.getErrorView(exception, "404 Not found");
-    }
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(NotFoundException.class)
+//    public ModelAndView handleNotFound(Exception exception) {
+//        return ErrorUtils.getErrorView(exception, "404 Not found");
+//    }
 }

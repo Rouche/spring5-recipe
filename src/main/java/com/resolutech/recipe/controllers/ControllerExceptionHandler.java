@@ -1,11 +1,7 @@
 package com.resolutech.recipe.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -14,10 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(NumberFormatException.class)
-    public ModelAndView handleNumberFormat(Exception exception) {
-        return ErrorUtils.getErrorView(exception, "400 Bad request");
-    }
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler(NumberFormatException.class)
+//    public ModelAndView handleNumberFormat(Exception exception) {
+//        return ErrorUtils.getErrorView(exception, "400 Bad request");
+//    }
 
 }
