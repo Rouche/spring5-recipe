@@ -14,6 +14,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class WebConfig {
 
+    // @Important config with a route, WebFlux only.
     @Bean
     RouterFunction<?> routes(RecipeService recipeService) {
         return RouterFunctions.route(GET("/api/recipes"),
