@@ -3,7 +3,6 @@ package com.resolutech.recipe.domain;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
@@ -12,12 +11,15 @@ import java.util.Set;
 /**
  * @Important When using Builder we have to tell Lombok to generate both NoArgsConstructor and AllArgsConstructor
  * Note: @XXXXConstructor should never be used because it exposes creation with new that bypasses @Builder.Default
+ *      But the problem is framework like Jackson or Thymeleaf needs it to deserialize.
  */
 @Data
 @EqualsAndHashCode(of={"id"})
 @Slf4j
 @Builder
 @Document
+@NoArgsConstructor
+@AllArgsConstructor
 public class Recipe {
 
     @Id
