@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 @ToString(exclude={"recipe"})
 @Entity
 @Builder
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Ingredient {
 
     @Id
@@ -27,18 +25,4 @@ public class Ingredient {
 
     @ManyToOne
     private Recipe recipe;
-
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-    }
-
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-        this.recipe = recipe;
-    }
-
 }

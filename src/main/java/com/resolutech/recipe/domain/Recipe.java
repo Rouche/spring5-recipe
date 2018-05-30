@@ -1,11 +1,13 @@
 package com.resolutech.recipe.domain;
 
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
+
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @Important When using Builder we have to tell Lombok to generate both No Args and All Args
@@ -15,8 +17,6 @@ import java.util.Set;
 @Slf4j
 @Entity
 @Builder
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Recipe {
 
     @Id

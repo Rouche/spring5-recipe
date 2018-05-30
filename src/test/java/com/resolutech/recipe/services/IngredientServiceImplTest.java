@@ -64,13 +64,13 @@ public class IngredientServiceImplTest {
         Recipe recipe = Recipe.builder().build();
         recipe.setId(1L);
 
-        Ingredient ingredient1 = new Ingredient();
+        Ingredient ingredient1 = Ingredient.builder().build();
         ingredient1.setId(1L);
 
-        Ingredient ingredient2 = new Ingredient();
+        Ingredient ingredient2 = Ingredient.builder().build();
         ingredient2.setId(1L);
 
-        Ingredient ingredient3 = new Ingredient();
+        Ingredient ingredient3 = Ingredient.builder().build();
         ingredient3.setId(3L);
 
         recipe.addIngredient(ingredient1);

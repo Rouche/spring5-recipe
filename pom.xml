@@ -37,6 +37,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<!-- @Important -->
 		<!-- This project is built Hybrid Tomcat/Embed - NOT RECOMMENDED -->
 		<!-- check packaging (war/jar) and remove this starter for normal springboot -->
@@ -59,6 +60,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
+			<version>1.16.22</version>
 			<artifactId>lombok</artifactId>
 		</dependency>
 
