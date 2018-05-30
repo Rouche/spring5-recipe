@@ -10,7 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @Important When using Builder we have to tell Lombok to generate both No Args and All Args
+ * @Important Lombok 1.16.22 : Private no-args constructor for @Data and @Value to enable deserialization frameworks (like Jackson)
+ * No need to add {@link lombok.NoArgsConstructor} or {@link lombok.AllArgsConstructor}
  */
 @Data
 @EqualsAndHashCode(of={"id"})
