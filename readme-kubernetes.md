@@ -45,7 +45,7 @@ https://github.com/kubernetes/minikube
 
 Put it in same place as kubectl, and add it to path.
 
-Check %HOMEPATH%\.minikube
+Check `%HOMEPATH%\.minikube`
 
 Check versions: `minikube get-k8s-versions`
 
@@ -65,7 +65,7 @@ minikube dashboard
 
 ##### 5.1 tip: use-context minikube
 
-If you had noticed closely when we started the cluster, there is a statement in the output that says “Kubectl is now configured to use the cluster.” What this is supposed to do is to eventually set the current context for the kubectl utility so that it knows which cluster it is talking to. Behind the scenes in your %HOMEPATH%\.kube directory, there is a config file that contains information about your Kubernetes cluster and the details for connecting to your various clusters is present over there.
+If you had noticed closely when we started the cluster, there is a statement in the output that says “Kubectl is now configured to use the cluster.” What this is supposed to do is to eventually set the current context for the kubectl utility so that it knows which cluster it is talking to. Behind the scenes in your `%HOMEPATH%\.kube` directory, there is a config file that contains information about your Kubernetes cluster and the details for connecting to your various clusters is present over there.
 
 In short, we have to be sure that the kubectl is pointing to the right cluster. In our case, the cluster name is minikube.
 
