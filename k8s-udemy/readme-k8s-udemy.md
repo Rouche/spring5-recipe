@@ -43,7 +43,7 @@ https://www.udemy.com/learn-kubernetes/learn
 
 #### Section 5 reference
 
-[See YAML examples in yaml-udemy](./k8s-udemy/deployment-definition.yml)
+[See YAML examples in yaml-udemy](./yaml/deployment-definition.yml)
 
 #####@Important
 After restart, to fix error:
