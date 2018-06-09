@@ -32,7 +32,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	//compile('org.springframework.boot:spring-boot-starter-web')
-	// @Important this will start Netty server instead of timcat for reactive stack
+	// @Important this will start Netty server instead of tomcat for reactive stack
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	compile('org.apache.commons:commons-compress:1.16.1')
 	runtime('org.springframework.boot:spring-boot-devtools')
@@ -43,7 +43,7 @@ dependencies {
 	compile 'org.webjars:bootstrap:4.0.0-2'
 	compile 'org.webjars:jquery:3.3.1-1'
 	compile 'org.webjars:popper.js:1.14.1'
-	compileOnly('org.projectlombok:lombok')
+	compileOnly('org.projectlombok:lombok:1.18.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 }
