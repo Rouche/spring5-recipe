@@ -10,3 +10,4 @@ INSERT INTO unit_of_measure (description) VALUES ('Ounce');
 INSERT INTO unit_of_measure (description) VALUES ('Each');
 INSERT INTO unit_of_measure (description) VALUES ('Dash');
 INSERT INTO unit_of_measure (description) VALUES ('Pint');
+INSERT INTO unit_of_measure (description) VALUES ('UOM Loaded from data-h2.sql');

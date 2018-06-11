@@ -60,16 +60,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
-			<version>1.16.22</version>
+			<version>1.18.0</version>
 			<artifactId>lombok</artifactId>
 		</dependency>
 
         <!-- MySQL connector -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
-        </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.11</version>
+		</dependency>
 
         <!-- @Important WEBJARS -->
 		<dependency>
