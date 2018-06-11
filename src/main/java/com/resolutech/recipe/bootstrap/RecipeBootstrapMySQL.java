@@ -1,20 +1,14 @@
 package com.resolutech.recipe.bootstrap;
 
-import com.resolutech.recipe.domain.*;
+import com.resolutech.recipe.domain.Category;
+import com.resolutech.recipe.domain.UnitOfMeasure;
 import com.resolutech.recipe.repositories.CategoryRepository;
-import com.resolutech.recipe.repositories.RecipeRepository;
 import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * @Author Jean-Francois Larouche
