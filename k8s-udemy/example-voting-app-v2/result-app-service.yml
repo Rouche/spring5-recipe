@@ -5,7 +5,7 @@ metadata:
   labels:
     name: result-service
     app: demo-voting-app
-
+    tier: front-end
 spec:
   type: LoadBalancer
   ports:

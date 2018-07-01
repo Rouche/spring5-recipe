@@ -2,6 +2,7 @@
 ## UDEMY course Kubernetes, important notes
 
 https://www.udemy.com/learn-kubernetes/learn
+https://github.com/mmumshad
 
 #### Section 3 - Setup VirtualBox
 
@@ -293,6 +294,14 @@ See ```./example-voting-app``` directory for yaml.
 
 - Click connect on cluster
 
+### Voting app v2 - Replicates with deployment
+
+Each pods are accessible from outside adress when service type is `NodePort`,  one solution would be to pud a LoadBalancer in front.  
+But this is a tedious task. 
+
+![shell](../src/main/resources/static/images/k8s-udemy/votingv2-lb.png)
+
+Setting service type to `LoadBalancer` will load balance automatically but it needs to be supported by the deployment platform. Like Gooogle GKE
 
 
 # Linguee:

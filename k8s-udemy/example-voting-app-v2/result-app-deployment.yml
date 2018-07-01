@@ -4,8 +4,9 @@ metadata:
   name: result-app-deployment
   labels:
     app: voting-app
+    tier: front-end
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       name: result-app-pod
