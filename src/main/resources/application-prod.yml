@@ -3,10 +3,12 @@ spring:
     url: jdbc:mysql://192.168.99.100:30306/sfg_prod
     username: sfg_prod_user
     password: r3s0
-    platform: mysql
   jpa:
     hibernate:
       ddl-auto: validate
     database-platform: org.hibernate.dialect.MySQL57Dialect
     database: mysql
     show-sql: false
+  sql:
+    init:
+      platform: mysql

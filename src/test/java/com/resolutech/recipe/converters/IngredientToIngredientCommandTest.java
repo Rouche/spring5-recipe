@@ -1,15 +1,16 @@
 package com.resolutech.recipe.converters;
 
+import java.math.BigDecimal;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.domain.Ingredient;
 import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.domain.UnitOfMeasure;
-import org.junit.Before;
-import org.junit.Test;
 
-import java.math.BigDecimal;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Author Jean-Francois Larouche
@@ -25,7 +26,7 @@ public class IngredientToIngredientCommandTest {
 
     IngredientToIngredientCommand converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
     }

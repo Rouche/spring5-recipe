@@ -6,12 +6,14 @@ import com.resolutech.recipe.converters.IngredientCommandToIngredient;
 import com.resolutech.recipe.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.resolutech.recipe.domain.Ingredient;
 import com.resolutech.recipe.domain.Recipe;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class IngredientCommandToIngredientTest {
 
@@ -23,7 +25,7 @@ public class IngredientCommandToIngredientTest {
 
     IngredientCommandToIngredient converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }

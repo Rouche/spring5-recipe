@@ -4,10 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -17,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @EqualsAndHashCode(of={"id"})
 @ToString(exclude={"recipe"})
+@NoArgsConstructor
+@AllArgsConstructor
 @Slf4j
 @Entity
 @Builder

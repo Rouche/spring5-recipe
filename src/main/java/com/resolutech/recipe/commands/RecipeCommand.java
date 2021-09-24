@@ -1,17 +1,18 @@
 package com.resolutech.recipe.commands;
 
-import com.resolutech.recipe.domain.Difficulty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.URL;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.validator.constraints.URL;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import com.resolutech.recipe.domain.Difficulty;
 
 /**
  * @Author Jean-Francois Larouche
@@ -21,6 +22,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class RecipeCommand {
+
     private Long id;
 
     @NotBlank

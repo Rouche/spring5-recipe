@@ -1,20 +1,21 @@
 package com.resolutech.recipe.controllers;
 
-import com.resolutech.recipe.commands.RecipeCommand;
-import com.resolutech.recipe.domain.Recipe;
-import com.resolutech.recipe.exceptions.NotFoundException;
-import com.resolutech.recipe.services.RecipeService;
-import org.junit.Before;
-import org.junit.Test;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.resolutech.recipe.commands.RecipeCommand;
+import com.resolutech.recipe.domain.Recipe;
+import com.resolutech.recipe.exceptions.NotFoundException;
+import com.resolutech.recipe.services.RecipeService;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -29,7 +30,7 @@ public class RecipeControllerTest {
 
     MockMvc mockMvc;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 

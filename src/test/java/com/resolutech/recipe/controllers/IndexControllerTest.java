@@ -1,13 +1,11 @@
 package com.resolutech.recipe.controllers;
 
-import com.resolutech.recipe.domain.Category;
-import com.resolutech.recipe.domain.Recipe;
-import com.resolutech.recipe.domain.UnitOfMeasure;
-import com.resolutech.recipe.repositories.CategoryRepository;
-import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
-import com.resolutech.recipe.services.RecipeService;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -16,11 +14,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import com.resolutech.recipe.domain.Category;
+import com.resolutech.recipe.domain.Recipe;
+import com.resolutech.recipe.domain.UnitOfMeasure;
+import com.resolutech.recipe.repositories.CategoryRepository;
+import com.resolutech.recipe.repositories.UnitOfMeasureRepository;
+import com.resolutech.recipe.services.RecipeService;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -45,7 +46,7 @@ public class IndexControllerTest {
     @Mock
     UnitOfMeasureRepository uomRepository;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
@@ -61,8 +62,8 @@ public class IndexControllerTest {
         MockMvc mockMVC = MockMvcBuilders.standaloneSetup(indexController).build();
 
         mockMVC.perform(get("/"))
-            .andExpect(status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("index"));
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("index"));
     }
 
     @Test

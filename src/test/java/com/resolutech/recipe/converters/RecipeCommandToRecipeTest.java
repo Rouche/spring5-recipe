@@ -1,15 +1,16 @@
 package com.resolutech.recipe.converters;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.resolutech.recipe.commands.CategoryCommand;
 import com.resolutech.recipe.commands.IngredientCommand;
 import com.resolutech.recipe.commands.NotesCommand;
 import com.resolutech.recipe.commands.RecipeCommand;
 import com.resolutech.recipe.domain.Difficulty;
 import com.resolutech.recipe.domain.Recipe;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RecipeCommandToRecipeTest {
     public static final Long RECIPE_ID = 1L;
@@ -30,7 +31,7 @@ public class RecipeCommandToRecipeTest {
     RecipeCommandToRecipe converter;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new RecipeCommandToRecipe(new CategoryCommandToCategory(),
                 new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),

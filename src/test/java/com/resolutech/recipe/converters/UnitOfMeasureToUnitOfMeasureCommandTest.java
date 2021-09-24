@@ -1,11 +1,12 @@
 package com.resolutech.recipe.converters;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.resolutech.recipe.commands.UnitOfMeasureCommand;
 import com.resolutech.recipe.domain.UnitOfMeasure;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Author Jean-Francois Larouche
@@ -17,7 +18,7 @@ public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     UnitOfMeasureToUnitOfMeasureCommand converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new UnitOfMeasureToUnitOfMeasureCommand();
     }

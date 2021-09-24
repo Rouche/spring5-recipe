@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(of={"id", "description"})
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
 public class Ingredient {

@@ -6,8 +6,8 @@ import com.resolutech.recipe.domain.Recipe;
 import com.resolutech.recipe.services.IngredientService;
 import com.resolutech.recipe.services.RecipeService;
 import com.resolutech.recipe.services.UnitOfMeasureService;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
@@ -38,7 +38,7 @@ public class IngredientControllerTest {
 
     MockMvc mockMvc;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 

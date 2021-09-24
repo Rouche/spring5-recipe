@@ -1,11 +1,13 @@
 package com.resolutech.recipe.converters;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.resolutech.recipe.commands.NotesCommand;
 import com.resolutech.recipe.domain.Notes;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Author Jean-Francois Larouche
@@ -16,7 +18,7 @@ public class NotesToNotesCommandTest {
     public static final String RECIPE_NOTES = "Notes";
     NotesToNotesCommand converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new NotesToNotesCommand();
     }

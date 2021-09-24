@@ -1,13 +1,13 @@
 package com.resolutech.recipe.converters;
 
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.resolutech.recipe.commands.CategoryCommand;
 import com.resolutech.recipe.domain.Category;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Author Jean-Francois Larouche
@@ -18,7 +18,7 @@ public class CategoryToCategoryCommandTest {
     public static final String DESCRIPTION = "descript";
     CategoryToCategoryCommand convter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         convter = new CategoryToCategoryCommand();
     }
